@@ -1,19 +1,25 @@
 package org.usfirst.frc.team1306.robot.commands.drivetrain;
 
 import java.util.ArrayList;
-import org.usfirst.frc.team1306.robot.Constants;
 import com.ctre.CANTalon;
 
+/**
+ * This class manages and stores all the drivetrain settings.
+ * @author Jackson Goth
+ */
 public class Settings {
 
-	public int NUMBER_OF_MOTORS;
 	public ArrayList<CANTalon> leftSide, rightSide;
+	public DriveMode controlMode;
+	
+	public Gyro gyro;
+	public boolean gyroPresent = false;
 	
 	public Settings() {
-		NUMBER_OF_MOTORS = Constants.DRIVETRAIN_MOTOR_COUNT;
 		leftSide = new ArrayList<CANTalon>();
 		rightSide = new ArrayList<CANTalon>();
 		
+		controlMode = DriveMode.ARCADE;
 	}
 	
 	public void add(CANTalon talon, TalonType type) {
@@ -28,5 +34,14 @@ public class Settings {
 		}
 	}
 	
+	public void add(GyroType type) {
+		gyroPresent = true;
+		gyro = new Gyro(type);
+	}
+	
+	public enum GyroType {NAVX, AD_IMU};
+	
 	public enum TalonType {LEFT_MASTER, RIGHT_MASTER, LEFT_SLAVE, RIGHT_SLAVE};
+	
+	public enum DriveMode {ARCADE, TANK_DRIVE};
 }

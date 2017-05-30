@@ -2,21 +2,29 @@ package org.usfirst.frc.team1306.robot.subsystems;
 
 import org.usfirst.frc.team1306.robot.Constants;
 import org.usfirst.frc.team1306.robot.commands.drivetrain.DriveSide;
+import org.usfirst.frc.team1306.robot.commands.drivetrain.Gyro;
 import org.usfirst.frc.team1306.robot.commands.drivetrain.Settings;
-
+import org.usfirst.frc.team1306.robot.commands.drivetrain.Settings.DriveMode;
 import com.ctre.CANTalon.TalonControlMode;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Drivetrain extends Subsystem {
 
 	DriveSide leftMotors, rightMotors;
+	public Gyro gyro;
 	
+	DriveMode mode;
+
 	public Drivetrain(Settings settings) {
 		
 		leftMotors = new DriveSide(settings.leftSide);
 		rightMotors = new DriveSide(settings.rightSide);
 		
+		mode = settings.controlMode;
+		
+		if(settings.gyroPresent) {
+			gyro = settings.gyro;
+		}
 	}
 	
 	public void tankDrive(double leftVal, double rightVal) {

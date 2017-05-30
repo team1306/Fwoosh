@@ -7,11 +7,12 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1306.robot.commands.CommandBase;
+import org.usfirst.frc.team1306.robot.commands.SmartDashboardUpdate;
 import org.usfirst.frc.team1306.robot.commands.autonomous.AutonomousCommand;
 import org.usfirst.frc.team1306.robot.commands.autonomous.AutonomousCommand.AutoMode;
 import org.usfirst.frc.team1306.robot.commands.drivetrain.Settings;
+import org.usfirst.frc.team1306.robot.commands.drivetrain.Settings.GyroType;
 import org.usfirst.frc.team1306.robot.commands.drivetrain.Settings.TalonType;
-
 import com.ctre.CANTalon;
 
 /**
@@ -38,17 +39,22 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		
 		driveConfig = new Settings();
+		
 		driveConfig.add(new CANTalon(RobotMap.LEFT_TALON_1_PORT),TalonType.LEFT_MASTER);
 		driveConfig.add(new CANTalon(RobotMap.RIGHT_TALON_1_PORT),TalonType.RIGHT_MASTER);
 		driveConfig.add(new CANTalon(RobotMap.LEFT_TALON_1_PORT),TalonType.LEFT_SLAVE);
 		driveConfig.add(new CANTalon(RobotMap.RIGHT_TALON_1_PORT),TalonType.RIGHT_SLAVE);
-	
+		
+		driveConfig.add(GyroType.NAVX);
+		
 		CommandBase.init(driveConfig); //Initializes all Subsystems
 		//CameraServer.getInstance().startAutomaticCapture("usb",0); //Camera 1
 		
 		chooser.addObject("Follow Path", new AutonomousCommand(AutoMode.FOLLOW_PATH));
 		chooser.addDefault("Do Nothing", new AutonomousCommand(AutoMode.DO_NOTHING));
 		SmartDashboard.putData("Auto mode", chooser);
+		
+		new SmartDashboardUpdate().start();
 	}
 
 	/**
