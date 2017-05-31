@@ -1,9 +1,7 @@
-package org.usfirst.frc.team1306.robot.commands.drivetrain;
+package org.usfirst.frc.team1306.lib.util;
 
-import org.usfirst.frc.team1306.lib.util.AnalogDevicesGyro;
-import org.usfirst.frc.team1306.robot.commands.drivetrain.Settings.GyroType;
+import org.usfirst.frc.team1306.lib.util.Settings.GyroType;
 import com.kauailabs.navx.frc.AHRS;
-
 import edu.wpi.first.wpilibj.SPI;
 
 public class Gyro {

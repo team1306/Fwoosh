@@ -10,10 +10,6 @@ import org.usfirst.frc.team1306.robot.commands.CommandBase;
 import org.usfirst.frc.team1306.robot.commands.SmartDashboardUpdate;
 import org.usfirst.frc.team1306.robot.commands.autonomous.AutonomousCommand;
 import org.usfirst.frc.team1306.robot.commands.autonomous.AutonomousCommand.AutoMode;
-import org.usfirst.frc.team1306.robot.commands.drivetrain.Settings;
-import org.usfirst.frc.team1306.robot.commands.drivetrain.Settings.GyroType;
-import org.usfirst.frc.team1306.robot.commands.drivetrain.Settings.TalonType;
-import com.ctre.CANTalon;
 
 /**
  * @Project_Fwoosh
@@ -28,7 +24,6 @@ public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
-	Settings driveConfig;
 	
 	/**
 	 * This function is run when the robot is first started up and we use it for
@@ -38,16 +33,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		
-		driveConfig = new Settings();
-		
-		driveConfig.add(new CANTalon(RobotMap.LEFT_TALON_1_PORT),TalonType.LEFT_MASTER);
-		driveConfig.add(new CANTalon(RobotMap.RIGHT_TALON_1_PORT),TalonType.RIGHT_MASTER);
-		driveConfig.add(new CANTalon(RobotMap.LEFT_TALON_1_PORT),TalonType.LEFT_SLAVE);
-		driveConfig.add(new CANTalon(RobotMap.RIGHT_TALON_1_PORT),TalonType.RIGHT_SLAVE);
-		
-		driveConfig.add(GyroType.NAVX);
-		
-		CommandBase.init(driveConfig); //Initializes all Subsystems
+		CommandBase.init(); //Initializes all Subsystems
 		//CameraServer.getInstance().startAutomaticCapture("usb",0); //Camera 1
 		
 		chooser.addObject("Follow Path", new AutonomousCommand(AutoMode.FOLLOW_PATH));
