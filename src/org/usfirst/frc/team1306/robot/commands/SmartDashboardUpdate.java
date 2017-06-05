@@ -22,7 +22,7 @@ public class SmartDashboardUpdate extends CommandBase {
 			SmartDashboard.putNumber("Gyro-X",drivetrain.gyro.getDisplacement(Axis.X));
 			SmartDashboard.putNumber("Gyro-Y",drivetrain.gyro.getDisplacement(Axis.Y));
 			SmartDashboard.putNumber("Gyro-Z",drivetrain.gyro.getDisplacement(Axis.Z));
-			SmartDashboard.putNumber("Gyro-Yaw",drivetrain.gyro.getYaw());
+			SmartDashboard.putNumber("Gyro-Yaw",drivetrain.gyro.getAngle());
 		}
 		
 		if(Constants.DRIVETRAIN_DEBUG) {

@@ -16,4 +16,9 @@ public class Constants {
 	//OI Constants
 	public final static double DEADBAND = 0.15; //Joystick and trigger deadband
 	public final static double JOYSTICK_MULTIPLIER = 1.0; //Joystick inputs raised to this power
+	
+	//Drivetrain Constants
+	public final static double PROFILE_UPDATE_RATE = 0.01;
+	public final static double PROFILE_MAX_TIME = 15;
+	public final static double PROFILE_MAX_STEPS = PROFILE_MAX_TIME / PROFILE_UPDATE_RATE;
 }

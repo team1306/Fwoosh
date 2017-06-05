@@ -28,11 +28,11 @@ public class Gyro {
 		}
 	}
 	
-	public double getYaw() {
+	public double getAngle() {
 		if(currentGyro.equals(GyroType.NAVX)) { //Try getCompassHeading()
-			return navx.getYaw();
+			return navx.getAngle();
 		} else {
-			return ad_imu.getYaw();
+			return ad_imu.getAngle();
 		}
 	}
 	
