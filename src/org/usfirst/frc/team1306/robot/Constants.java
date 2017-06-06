@@ -19,6 +19,4 @@ public class Constants {
 	
 	//Drivetrain Constants
 	public final static double PROFILE_UPDATE_RATE = 0.01;
-	public final static double PROFILE_MAX_TIME = 15;
-	public final static double PROFILE_MAX_STEPS = PROFILE_MAX_TIME / PROFILE_UPDATE_RATE;
 }
