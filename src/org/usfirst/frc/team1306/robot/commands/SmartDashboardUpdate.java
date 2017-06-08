@@ -28,6 +28,8 @@ public class SmartDashboardUpdate extends CommandBase {
 		if(Constants.DRIVETRAIN_DEBUG) {
 			SmartDashboard.putNumber("LeftSide-Position:",drivetrain.leftMotors.getEncPos());
 			SmartDashboard.putNumber("RightSide-Position:",drivetrain.rightMotors.getEncPos());
+			SmartDashboard.putNumber("LeftSide-AdjustPos:",drivetrain.leftMotors.getEncPos() * Constants.ENCODER_CONVERSION);
+			SmartDashboard.putNumber("RightSide-AdjustPos:",drivetrain.rightMotors.getEncPos() * Constants.ENCODER_CONVERSION);
 			SmartDashboard.putNumber("LeftSide-Velocity:",drivetrain.leftMotors.getEncVel());
 			SmartDashboard.putNumber("RightSide-Velocity:",drivetrain.rightMotors.getEncVel());
 		}

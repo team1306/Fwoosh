@@ -48,7 +48,7 @@ public class Drivetrain extends Subsystem {
 	 * @param leftVal - Speed for left motors
 	 * @param rightVal - Speed for right motors
 	 */
-	public void tankDrive(double leftVal, double rightVal) {
+	public void driveVBus(double leftVal, double rightVal) {
 		leftMotors.changeControlMode(TalonControlMode.PercentVbus);
 		rightMotors.changeControlMode(TalonControlMode.PercentVbus);
 
@@ -56,6 +56,28 @@ public class Drivetrain extends Subsystem {
 			leftMotors.set(leftVal);
 			rightMotors.set(-rightVal); 
 		}
+	}
+	
+	/**
+	 * Powers each DriveSide with a left and right speed
+	 * @param leftVal - Speed for left motors
+	 * @param rightVal - Speed for right motors
+	 */
+	public void driveSpeed(double leftVal, double rightVal) {
+		leftMotors.changeControlMode(TalonControlMode.Speed);
+		rightMotors.changeControlMode(TalonControlMode.Speed);
+
+		if(Constants.DRIVETRAIN_ENABLED) {
+			leftMotors.set(leftVal);
+			rightMotors.set(-rightVal); 
+		}
+	}
+	
+	public void stop() {
+		leftMotors.changeControlMode(TalonControlMode.PercentVbus);
+		rightMotors.changeControlMode(TalonControlMode.PercentVbus);
+		leftMotors.set(0.0);
+		rightMotors.set(0.0);
 	}
 	
 	@Override

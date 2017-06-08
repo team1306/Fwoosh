@@ -46,6 +46,7 @@ public class DriveSide {
 		}
 		master.configNominalOutputVoltage(type.nominalForwardVoltage,type.nominalReverseVoltage); //TODO Make this subsystem specialized instead of encoder specialized
 		master.configPeakOutputVoltage(type.peakForwardVoltage,type.peakReverseVoltage); //TODO Same as above
+		master.setEncPosition(0);
 	}
 	
 	public void setPIDParams(PIDParameters params) {

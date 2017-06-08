@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1306.robot.commands.autonomous;
 
+import org.usfirst.frc.team1306.robot.commands.drivetrain.FollowPath;
+import org.usfirst.frc.team1306.robot.commands.drivetrain.Profile;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousCommand extends CommandGroup {
@@ -10,6 +12,7 @@ public class AutonomousCommand extends CommandGroup {
 		
 		if(mode.equals(AutoMode.FOLLOW_PATH)) {
 			
+			addSequential(new FollowPath(new Profile(200,24,24,15)));
 		} else {
 			
 		}

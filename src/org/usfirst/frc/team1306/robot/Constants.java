@@ -10,7 +10,7 @@ public class Constants {
 	public final static boolean DRIVETRAIN_ENABLED = true;		
 	
 	//SmartDashboard Debug Modes
-	public static final boolean DRIVETRAIN_DEBUG = false;
+	public static final boolean DRIVETRAIN_DEBUG = true;
 	public static final boolean GYRO_DEBUG = true;
 	
 	//OI Constants
@@ -19,4 +19,5 @@ public class Constants {
 	
 	//Drivetrain Constants
 	public final static double PROFILE_UPDATE_RATE = 0.01;
+	public final static double ENCODER_CONVERSION = 1;
 }

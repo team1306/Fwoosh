@@ -22,6 +22,7 @@ public class Gyro {
 				navx = new AHRS(SPI.Port.kMXP);
 				navx.reset();
 				navx.resetDisplacement();
+				navx.zeroYaw();
 			} catch(RuntimeException ex) {
 				
 			}
