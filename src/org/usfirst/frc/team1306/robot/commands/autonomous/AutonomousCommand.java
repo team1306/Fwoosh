@@ -12,7 +12,7 @@ public class AutonomousCommand extends CommandGroup {
 		
 		if(mode.equals(AutoMode.FOLLOW_PATH)) {
 			
-			addSequential(new FollowPath(new Profile(200,24,24,15)));
+			addSequential(new FollowPath(new Profile(300,300,150,15)));
 		} else {
 			
 		}

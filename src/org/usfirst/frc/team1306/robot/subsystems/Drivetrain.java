@@ -7,6 +7,7 @@ import org.usfirst.frc.team1306.lib.util.Settings.DriveMode;
 import org.usfirst.frc.team1306.robot.Constants;
 import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The Drivetrain Subsystem. This subsystem is initialzed with a set of Settings provided from the CommandBase.
@@ -34,12 +35,12 @@ public class Drivetrain extends Subsystem {
 		
 		if(settings.encoderPresent) {
 			leftMotors.initEncoders(settings.encoderType);
-			leftMotors.flipEncoderOutput(false);
-			leftMotors.flipLoopOutput(false);
+//			leftMotors.flipEncoderOutput(false);
+//			leftMotors.flipLoopOutput(false);
 			
 			rightMotors.initEncoders(settings.encoderType);
-			rightMotors.flipEncoderOutput(false); //TODO Flip this back to true
-			rightMotors.flipLoopOutput(false); //TODO Same as above
+//			rightMotors.flipEncoderOutput(true); //TODO Flip this back to true
+//			rightMotors.flipLoopOutput(true); //TODO Same as above
 		}
 	}
 
@@ -67,6 +68,9 @@ public class Drivetrain extends Subsystem {
 		leftMotors.changeControlMode(TalonControlMode.Speed);
 		rightMotors.changeControlMode(TalonControlMode.Speed);
 
+		SmartDashboard.putNumber("leftVal",leftVal);
+		SmartDashboard.putNumber("rightval",rightVal);
+		
 		if(Constants.DRIVETRAIN_ENABLED) {
 			leftMotors.set(leftVal);
 			rightMotors.set(-rightVal); 

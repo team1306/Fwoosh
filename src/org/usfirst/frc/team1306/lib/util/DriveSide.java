@@ -3,6 +3,7 @@ package org.usfirst.frc.team1306.lib.util;
 import java.util.ArrayList;
 import org.usfirst.frc.team1306.lib.util.Settings.EncoderType;
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
 public class DriveSide {
@@ -40,13 +41,20 @@ public class DriveSide {
 	
 	public void initEncoders(EncoderType type) {
 		
-		master.setFeedbackDevice(type.device);
-		if(!type.equals(EncoderType.CTRE_MAG)) {
-			master.configEncoderCodesPerRev(type.codesRev);
-		}
-		master.configNominalOutputVoltage(type.nominalForwardVoltage,type.nominalReverseVoltage); //TODO Make this subsystem specialized instead of encoder specialized
-		master.configPeakOutputVoltage(type.peakForwardVoltage,type.peakReverseVoltage); //TODO Same as above
+		master.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		master.configEncoderCodesPerRev(256);
+		master.configNominalOutputVoltage(+0.0f, -0.0f);
+		master.configPeakOutputVoltage(+12.0f, -12.0f);
+		
 		master.setEncPosition(0);
+		
+//		master.setFeedbackDevice(type.device);
+//		if(!type.equals(EncoderType.CTRE_MAG)) {
+//			master.configEncoderCodesPerRev(type.codesRev);
+//		}
+//		master.configNominalOutputVoltage(type.nominalForwardVoltage,type.nominalReverseVoltage); //TODO Make this subsystem specialized instead of encoder specialized
+//		master.configPeakOutputVoltage(type.peakForwardVoltage,type.peakReverseVoltage); //TODO Same as above
+////		master.setEncPosition(0);
 	}
 	
 	public void setPIDParams(PIDParameters params) {
@@ -71,6 +79,10 @@ public class DriveSide {
 	
 	public double getEncPos() {
 		return master.getEncPosition();
+	}
+	
+	public void setEncPos(int pos) {
+		master.setEncPosition(pos);
 	}
 	
 	public double getEncVel() {
