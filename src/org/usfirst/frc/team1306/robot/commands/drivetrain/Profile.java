@@ -1,80 +1,126 @@
 package org.usfirst.frc.team1306.robot.commands.drivetrain;
 
 import java.util.ArrayList;
-import org.usfirst.frc.team1306.robot.Constants;
 
 public class Profile {
 
-	ProfileStatus status;
-	ArrayList<Point> path;
-	double distance, maxVel, maxAccel, maxTime;
+	public double maxTime;
+	public ArrayList<Point> path;
+	private ArrayList<Point> mirrorPath;
+	private double distance, maxVelocity, maxAcceleration, maxJerk;
 	
-	public Profile(double d, double v, double a, double t) {
+	public Profile(double d, double v, double a, double j, double t) {
 		distance = d;
-		maxVel = v;
-		maxAccel = a;
+		maxVelocity = v;
+		maxAcceleration = a;
+		maxJerk = j;
 		maxTime = t;
-		
-		double midpoint = distance / 2;
-		double maxSteps = maxTime / Constants.PROFILE_UPDATE_RATE;
-		int accelerationSteps = 0;
-		int constantPreSteps = 0;
-		int constantPostSteps = 0;
-		int decelerationSteps = 0;
-		
-		status = ProfileStatus.ACCELERATING;
-		
+
 		path = new ArrayList<Point>();
-		path.add(new Point(0,0,0));
+		mirrorPath = new ArrayList<Point>();
 		
+		ProfileStatus status = ProfileStatus.ACCELERATING;
+		ProfileSubStatus subStatus = ProfileSubStatus.ACCEL_RAMP_UP;
+		double stepTime = 0.01;
+		int maxSteps = (int) (maxTime / stepTime);
+		
+		boolean mirroring = false;
+		int accelPreMirrorCounter = 0;
+		int accelPostMirrorCounter = 0;
+		int profileMirrorCounter = 0;
+		int profileMirrorStopPoint = 0;
+		
+		path.add(new Point(0,0,0,0));
+	
 		for(int i = 1; i < maxSteps; i++) {
-			
-			double acceleration = 0, velocity = 0, position = 0;
+		
 			Point prevPoint = path.get(i - 1);
+//			System.out.println("PreMirror" + accelPreMirrorCounter);
+//			System.out.println("PostMirror" + accelPostMirrorCounter);
+//			System.out.println(mirroring);
 			
-			if(prevPoint.velocity >= maxVel) {
-				status = ProfileStatus.CONSTANT_PRE_MIDPOINT;
+			if(prevPoint.acceleration > maxAcceleration) {
+				subStatus = ProfileSubStatus.ACCEL_HOLD;
 			}
 			
-			if(prevPoint.position >= midpoint) {
-				status = ProfileStatus.CONSTANT_POST_MIDPOINT;
+			if(prevPoint.velocity > maxVelocity / 2) {
+				mirroring = true;
 			}
 			
-			if(status.equals(ProfileStatus.CONSTANT_POST_MIDPOINT) && constantPreSteps == constantPostSteps) {
-				status = ProfileStatus.DECELERATING;
+			if(subStatus.equals(ProfileSubStatus.ACCEL_HOLD) && accelPostMirrorCounter == accelPreMirrorCounter && mirroring) {
+				subStatus = ProfileSubStatus.ACCEL_RAMP_DOWN;
 			}
+			
+			if(subStatus.equals(ProfileSubStatus.ACCEL_RAMP_DOWN) && prevPoint.velocity > maxVelocity) {
+				subStatus = ProfileSubStatus.CONSTANT;
+			}
+			
+			if(prevPoint.position > distance / 2 && !(status.equals(ProfileStatus.MIRRORING))) {
+				status = ProfileStatus.MIRRORING;
+				for(int k = 0; k < path.size(); k++) {
+					mirrorPath.add(0,path.get(k));
+				}
+				profileMirrorCounter = 0;
+				profileMirrorStopPoint = mirrorPath.size();
+			}
+			
+			double position = 0, velocity = 0, acceleration = 0, jerk = 0;
 			
 			if(status.equals(ProfileStatus.ACCELERATING)) {
-				acceleration = maxAccel;
-				velocity = prevPoint.velocity + (acceleration * Constants.PROFILE_UPDATE_RATE);
-				accelerationSteps++;
-			} else if(status.equals(ProfileStatus.CONSTANT_PRE_MIDPOINT)) {
-				acceleration = 0;
-				velocity = prevPoint.velocity;
-				constantPreSteps++;
-			} else if(status.equals(ProfileStatus.CONSTANT_POST_MIDPOINT)) {
-				acceleration = 0;
-				velocity = prevPoint.velocity;
-				constantPostSteps++;
-			} else if(status.equals(ProfileStatus.DECELERATING)) {
-				if(decelerationSteps == accelerationSteps) {
+				if(subStatus.equals(ProfileSubStatus.ACCEL_RAMP_UP)) {
+					jerk = maxJerk;
+					acceleration = prevPoint.acceleration + (jerk*stepTime);
+				} else if(subStatus.equals(ProfileSubStatus.ACCEL_HOLD)) {
+					jerk = 0;
+					acceleration = prevPoint.acceleration;
+					if(!mirroring) {
+						accelPreMirrorCounter++;
+					} else {
+						accelPostMirrorCounter++;
+					}
+				} else if(subStatus.equals(ProfileSubStatus.ACCEL_RAMP_DOWN)) {
+					jerk = maxJerk;
+					acceleration = prevPoint.acceleration - (jerk*stepTime);
+				}
+			} else if(status.equals(ProfileStatus.CONSTANT)) {
+				if(subStatus.equals(ProfileSubStatus.CONSTANT)) {
+					jerk = 0;
 					acceleration = 0;
-					velocity = 0;
-					status = ProfileStatus.FINISHED;
+				}
+			} else if(status.equals(ProfileStatus.MIRRORING)) {
+				if(profileMirrorCounter >= profileMirrorStopPoint) {
+					jerk = 0;
+					acceleration = 0;
 				} else {
-					acceleration = maxAccel;
-					velocity = prevPoint.velocity - (acceleration * Constants.PROFILE_UPDATE_RATE);
-					decelerationSteps++;
-				}				
-			} else if(status.equals(ProfileStatus.FINISHED)) {
-				acceleration = 0;
-				velocity = 0;
+					jerk = mirrorPath.get(profileMirrorCounter).jerk; 
+					acceleration = mirrorPath.get(profileMirrorCounter).acceleration;
+				}
+				profileMirrorCounter++;
 			}
 			
-			position = prevPoint.position + (velocity * Constants.PROFILE_UPDATE_RATE);
-			path.add(new Point(acceleration, velocity, position));
+			if(status.equals(ProfileStatus.MIRRORING)) {
+				velocity = prevPoint.velocity - (acceleration*stepTime);
+				position = prevPoint.position + (velocity*stepTime);
+			} else {
+				velocity = prevPoint.velocity + (acceleration*stepTime);
+				position = prevPoint.position + (velocity*stepTime);
+			}
+			
+			if(velocity < 0) velocity = 0;
+			
+			path.add(new Point(position,velocity,acceleration,jerk));
 		}
 	}
 	
-	public enum ProfileStatus {ACCELERATING, CONSTANT_PRE_MIDPOINT, CONSTANT_POST_MIDPOINT, DECELERATING, FINISHED};
+	public String toString() {
+		String pathPrint = "";
+		for(int i = 0; i < path.size(); i++) {
+			pathPrint += path.get(i).jerk;
+			pathPrint += " ";
+		}
+		return pathPrint;
+	}
+	
+	public enum ProfileStatus {ACCELERATING, CONSTANT, MIRRORING};
+	public enum ProfileSubStatus {ACCEL_RAMP_UP, ACCEL_HOLD, ACCEL_RAMP_DOWN, CONSTANT};
 }

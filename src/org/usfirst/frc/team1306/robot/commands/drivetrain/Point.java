@@ -2,11 +2,12 @@ package org.usfirst.frc.team1306.robot.commands.drivetrain;
 
 public class Point {
 
-	public double acceleration, velocity, position;
+	public double position, velocity, acceleration, jerk;
 	
-	public Point(double a, double v, double p) {
-		acceleration = a;
-		velocity = v;
+	public Point(double p, double v, double a, double j) {
 		position = p;
+		velocity = v;
+		acceleration = a;
+		jerk = j;
 	}
 }
