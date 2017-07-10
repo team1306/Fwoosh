@@ -5,7 +5,12 @@ import org.usfirst.frc.team1306.lib.util.Gyro;
 import org.usfirst.frc.team1306.lib.util.Settings;
 import org.usfirst.frc.team1306.lib.util.Settings.DriveMode;
 import org.usfirst.frc.team1306.robot.Constants;
+import org.usfirst.frc.team1306.robot.commands.drivetrain.Drive;
+import org.usfirst.frc.team1306.robot.commands.drivetrain.DriveBoth;
+import org.usfirst.frc.team1306.robot.commands.drivetrain.TankDrive;
+
 import com.ctre.CANTalon.TalonControlMode;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -86,6 +91,6 @@ public class Drivetrain extends Subsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-		
+		setDefaultCommand(new TankDrive());
 	}
 }

@@ -1,12 +1,14 @@
 package org.usfirst.frc.team1306.robot;
 
+import org.usfirst.frc.team1306.robot.commands.drivetrain.DriveForward;
+import org.usfirst.frc.team1306.robot.triggers.DPadDirection;
+import org.usfirst.frc.team1306.robot.triggers.DPadPress;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
-import org.usfirst.frc.team1306.robot.triggers.DPadDirection;
-import org.usfirst.frc.team1306.robot.triggers.DPadPress;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -79,6 +81,9 @@ public class OI {
 		secondaryDPadRight = new DPadPress(secondaryController, DPadDirection.RIGHT);
 		secondaryDPadLeft = new DPadPress(secondaryController, DPadDirection.LEFT);
 		secondaryDPadDown = new DPadPress(secondaryController, DPadDirection.DOWN);
+		
+		
+//		pbuttonA.whenPressed(new DriveForward());
 	}
 	
 	/**
