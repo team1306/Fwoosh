@@ -6,10 +6,14 @@ import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
+/**
+ * 
+ * @author Jackson Goth
+ */
 public class DriveSide {
 
-	ArrayList<CANTalon> talons;
-	CANTalon master;
+	public CANTalon master;
+	private ArrayList<CANTalon> talons;
 	
 	public DriveSide(ArrayList<CANTalon> talons) {
 		
@@ -24,9 +28,9 @@ public class DriveSide {
 			master.enable();
 			
 			for(int i = 1; i < talons.size(); i++) {
-				talons.get(i).changeControlMode(TalonControlMode.Follower);
-				talons.get(i).set(talons.get(0).getDeviceID());
-				talons.get(i).enable();
+				this.talons.get(i).changeControlMode(TalonControlMode.Follower);
+				this.talons.get(i).set(talons.get(0).getDeviceID());
+				this.talons.get(i).enable();
 			}
 		}
 	}
