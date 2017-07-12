@@ -18,7 +18,7 @@ public class AutonomousCommand extends CommandGroup {
 
 		if(mode.equals(AutoMode.FOLLOW_PATH)) {
 			
-			addSequential(new FollowPath(new Profile(600,150,75,75,15))); //Distance, Velocity, Accel, Jerk, Time
+			addSequential(new FollowPath(new Profile(60,15,7.5,7.5,15))); //Distance, Velocity, Accel, Jerk, Time
 		} 
 		else if(mode.equals(AutoMode.NEW_AUTO)) {
 			addSequential (new DriveForwards(5.5, 0.2, 0.2));
