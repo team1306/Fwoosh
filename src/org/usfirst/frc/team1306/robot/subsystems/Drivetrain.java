@@ -5,12 +5,8 @@ import org.usfirst.frc.team1306.lib.util.Gyro;
 import org.usfirst.frc.team1306.lib.util.Settings;
 import org.usfirst.frc.team1306.lib.util.Settings.DriveMode;
 import org.usfirst.frc.team1306.robot.Constants;
-import org.usfirst.frc.team1306.robot.commands.drivetrain.Drive;
-import org.usfirst.frc.team1306.robot.commands.drivetrain.DriveBoth;
-import org.usfirst.frc.team1306.robot.commands.drivetrain.TankDrive;
-
+import org.usfirst.frc.team1306.robot.commands.drivetrain.EncoderTesting;
 import com.ctre.CANTalon.TalonControlMode;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -40,7 +36,7 @@ public class Drivetrain extends Subsystem {
 		
 		if(settings.encoderPresent) {
 			leftMotors.initEncoders(settings.encoderType);
-//			leftMotors.flipEncoderOutput(false);
+//			leftMotors.flipEncoderOutput(false); TODO Commented out until I fix bugs with encoder initialization
 //			leftMotors.flipLoopOutput(false);
 			
 			rightMotors.initEncoders(settings.encoderType);
@@ -82,6 +78,9 @@ public class Drivetrain extends Subsystem {
 		}
 	}
 	
+	/**
+	 * Forces all drive-motors to stop turning
+	 */
 	public void stop() {
 		leftMotors.changeControlMode(TalonControlMode.PercentVbus);
 		rightMotors.changeControlMode(TalonControlMode.PercentVbus);
@@ -91,6 +90,6 @@ public class Drivetrain extends Subsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new TankDrive());
+		setDefaultCommand(new EncoderTesting());
 	}
 }

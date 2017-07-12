@@ -3,7 +3,7 @@ package org.usfirst.frc.team1306.lib.util;
 import org.usfirst.frc.team1306.robot.commands.CommandBase;
 
 /**
- * This is just an empty command that you can copy and paste methods from...
+ * This is just an empty command that you can copy and paste the methods from...
  */
 public class CommandShell extends CommandBase {
 

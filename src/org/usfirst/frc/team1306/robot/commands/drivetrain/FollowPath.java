@@ -5,12 +5,15 @@ import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * This command is meant to drive the robot along a given path/profile and applies a P-loop to how far the drivetrain is off from the path.
+ * @author Jackson Goth
+ */
 public class FollowPath extends CommandBase {
 
-	Profile profile;
-	Timer timer;
-	
-	int counter;
+	private Profile profile;
+	private Timer timer;
+	private int counter;
 	
 	public FollowPath(Profile p) {
 		requires(drivetrain);
@@ -21,6 +24,8 @@ public class FollowPath extends CommandBase {
 	
 	@Override
 	protected void initialize() {
+		
+		/* Resets the timer that will determine when the command will end */
 		timer.reset();
 		timer.start();
 		
@@ -29,7 +34,7 @@ public class FollowPath extends CommandBase {
 		drivetrain.leftMotors.setEncPos(0);
 		drivetrain.rightMotors.setEncPos(0);
 		
-		counter = 0;
+		counter = 0; //Resets counter that's also used to determine po
 	}
 
 	@Override

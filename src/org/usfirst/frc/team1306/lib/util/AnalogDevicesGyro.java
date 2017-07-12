@@ -18,6 +18,10 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.tables.ITable;
 
+/**
+ * This is a class made by AnalogDevices for their gyro board. If we are using this it should be initialized in
+ * the drivetrain subsystem and accessed through there.
+ */
 public class AnalogDevicesGyro extends GyroBase implements Gyro, PIDSource, LiveWindowSendable {
   private static final double kTimeout = 0.1;
   private static final double kCalibrationSampleTime = 5.0;
