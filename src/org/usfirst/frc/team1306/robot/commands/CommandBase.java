@@ -31,8 +31,8 @@ public abstract class CommandBase extends Command {
 		/* Adding all of the TalonSRXs, one master and one slave for each side */
 		driveConfig.add(new CANTalon(RobotMap.LEFT_TALON_1_PORT),TalonType.LEFT_MASTER);
 		driveConfig.add(new CANTalon(RobotMap.RIGHT_TALON_1_PORT),TalonType.RIGHT_MASTER);
-		driveConfig.add(new CANTalon(RobotMap.LEFT_TALON_1_PORT),TalonType.LEFT_SLAVE);
-		driveConfig.add(new CANTalon(RobotMap.RIGHT_TALON_1_PORT),TalonType.RIGHT_SLAVE);
+		driveConfig.add(new CANTalon(RobotMap.LEFT_TALON_2_PORT),TalonType.LEFT_SLAVE);
+		driveConfig.add(new CANTalon(RobotMap.RIGHT_TALON_2_PORT),TalonType.RIGHT_SLAVE);
 		
 		driveConfig.add(EncoderType.GRAYHILL); //Adding encoders to the config
 		driveConfig.add(GyroType.NAVX); //Adding a gyro to the config

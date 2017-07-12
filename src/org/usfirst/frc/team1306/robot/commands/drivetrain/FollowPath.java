@@ -45,8 +45,8 @@ public class FollowPath extends CommandBase {
 		SmartDashboard.putNumber("leftPos",drivetrain.leftMotors.getEncPos());
 		SmartDashboard.putNumber("rightPos",drivetrain.rightMotors.getEncPos());
 		
-//		drivetrain.driveSpeed(speed,speed);
-		drivetrain.driveSpeed(((speed+leftAdj)/12.5663)*60,((speed+rightAdj)/12.5663)*60);
+//		drivetrain.driveSpeed(300,300);
+//		drivetrain.driveSpeed(((speed+leftAdj)/12.5663)*60,((speed+rightAdj)/12.5663)*60);
 		counter++;
 	}
 
