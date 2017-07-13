@@ -40,8 +40,8 @@ public class FollowPath extends CommandBase {
 	@Override
 	protected void execute() {
 		double speed = profile.path.get(counter).velocity;
-		double leftError = profile.path.get(counter).position - (Math.abs(drivetrain.leftMotors.getEncPos()/256)*12.5663);
-		double rightError = profile.path.get(counter).position - (Math.abs(drivetrain.rightMotors.getEncPos()/256)*12.5663);
+		double leftError = profile.path.get(counter).position - (Math.abs(drivetrain.leftMotors.getEncPos()/1024)*12.5663);
+		double rightError = profile.path.get(counter).position - (Math.abs(drivetrain.rightMotors.getEncPos()/1024)*12.5663);
 		double leftAdj = leftError * 1.2;
 		double rightAdj = rightError * 1.2;
 		
@@ -51,7 +51,7 @@ public class FollowPath extends CommandBase {
 		SmartDashboard.putNumber("rightPos",drivetrain.rightMotors.getEncPos());
 		
 //		drivetrain.driveSpeed(300,300);
-//		drivetrain.driveSpeed(((speed+leftAdj)/12.5663)*60,((speed+rightAdj)/12.5663)*60);
+		drivetrain.driveSpeed(((speed+leftAdj)/12.5663)*60,((speed+rightAdj)/12.5663)*60);
 		counter++;
 	}
 
