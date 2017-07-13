@@ -4,19 +4,24 @@ import org.usfirst.frc.team1306.lib.util.Settings.GyroType;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 
+/**
+ * Gyro
+ * 
+ * 
+ * @author Jackson Goth
+ */
 public class Gyro {
 
-	AnalogDevicesGyro ad_imu;
-	AHRS navx;
-	
-	GyroType currentGyro;
+	private AnalogDevicesGyro ad_imu;
+	private AHRS navx;
+	public GyroType currentGyro;
 	
 	public Gyro(GyroType type) {
+		
 		currentGyro = type;
+		
 		if(type.equals(GyroType.AD_IMU)) {
 			ad_imu = new AnalogDevicesGyro();
-			
-			
 		} else if(type.equals(GyroType.NAVX)) {
 			try {
 				navx = new AHRS(SPI.Port.kMXP);

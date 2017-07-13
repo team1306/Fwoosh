@@ -1,6 +1,8 @@
 package org.usfirst.frc.team1306.robot;
 
 /**
+ * Constants
+ * 
  * To store finalized variables all in one place
  * @author Jackson Goth and Sam Roquitte
  */

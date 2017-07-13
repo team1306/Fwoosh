@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
+ * FollowPath
+ * 
  * This command is meant to drive the robot along a given path/profile and applies a P-loop to how far the drivetrain is off from the path.
  * @author Jackson Goth
  */
@@ -34,11 +36,14 @@ public class FollowPath extends CommandBase {
 		drivetrain.leftMotors.setEncPos(0);
 		drivetrain.rightMotors.setEncPos(0);
 		
-		counter = 0; //Resets counter that's also used to determine po
+		counter = 0; //Resets counter that's used to determine position in profile
 	}
 
 	@Override
 	protected void execute() {
+		
+		counter = (int) (timer.get() / 0.01);
+		
 		double speed = profile.path.get(counter).velocity;
 		double leftError = profile.path.get(counter).position - (Math.abs(drivetrain.leftMotors.getEncPos()/1024)*12.5663);
 		double rightError = profile.path.get(counter).position - (Math.abs(drivetrain.rightMotors.getEncPos()/1024)*12.5663);
@@ -47,12 +52,9 @@ public class FollowPath extends CommandBase {
 		
 		SmartDashboard.putNumber("leftError",leftError);
 		SmartDashboard.putNumber("rightError",rightError);
-		SmartDashboard.putNumber("leftPos",drivetrain.leftMotors.getEncPos());
-		SmartDashboard.putNumber("rightPos",drivetrain.rightMotors.getEncPos());
 		
-//		drivetrain.driveSpeed(300,300);
 		drivetrain.driveSpeed(((speed+leftAdj)/12.5663)*60,((speed+rightAdj)/12.5663)*60);
-		counter++;
+//		counter++;
 	}
 
 	@Override

@@ -59,6 +59,9 @@ public class DriveSide {
 		master.set(speed);
 	}
 
+	/**
+	 * Initializes the drive encoder based on what type of encoder it is
+	 */
 	public void initEncoders(EncoderType type) {
 		
 		master.setFeedbackDevice(FeedbackDevice.QuadEncoder);
@@ -68,15 +71,19 @@ public class DriveSide {
 		
 		master.setEncPosition(0);
 		
+		/* TODO Code below in current form doesn't work, maybe make an encoder initialization class for all subsystems */ 
 //		master.setFeedbackDevice(type.device);
 //		if(!type.equals(EncoderType.CTRE_MAG)) {
 //			master.configEncoderCodesPerRev(type.codesRev);
 //		}
-//		master.configNominalOutputVoltage(type.nominalForwardVoltage,type.nominalReverseVoltage); //TODO Make this subsystem specialized instead of encoder specialized
-//		master.configPeakOutputVoltage(type.peakForwardVoltage,type.peakReverseVoltage); //TODO Same as above
-////		master.setEncPosition(0);
+//		master.configNominalOutputVoltage(type.nominalForwardVoltage,type.nominalReverseVoltage); 
+//		master.configPeakOutputVoltage(type.peakForwardVoltage,type.peakReverseVoltage);
+//		master.setEncPosition(0);
 	}
 	
+	/**
+	 * Sets up the PIDF control values
+	 */
 	public void setPIDParams(PIDParameters params) {
 		master.setF(params.f);
 		master.setP(params.p);
@@ -84,27 +91,45 @@ public class DriveSide {
 		master.setD(params.d);
 	}
 	
+	/**
+	 * Sets up the Motion Magic control values
+	 */
 	public void setMotionMagicParams(double cruiseVelocity, double acceleration) {
 		master.setMotionMagicCruiseVelocity(cruiseVelocity);
 		master.setMotionMagicAcceleration(acceleration);
 	}
 	
+	/**
+	 * Reverses motor output from the loop output, (ex. if true a loop output of 1 would turn the motor at -1)
+	 */
 	public void flipLoopOutput(boolean flipped) {
 		master.reverseOutput(flipped);
 	}
 	
+	/**
+	 * Reverses encoder output (ex. if true an encoder output of 200 would read -200)
+	 */
 	public void flipEncoderOutput(boolean flipped) {
 		master.reverseSensor(flipped);
 	}
 	
+	/**
+	 * Returns the current position from the encoder
+	 */
 	public double getEncPos() {
 		return master.getEncPosition();
 	}
 	
+	/**
+	 * Sets the encoder position to a given position (Generally used to reset the encoder output)
+	 */
 	public void setEncPos(int pos) {
 		master.setEncPosition(pos);
 	}
 	
+	/**
+	 * Returns the current velocity from the encoder
+	 */
 	public double getEncVel() {
 		return master.getEncVelocity();
 	}

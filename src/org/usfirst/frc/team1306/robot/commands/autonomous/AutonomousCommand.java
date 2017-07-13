@@ -3,7 +3,6 @@ package org.usfirst.frc.team1306.robot.commands.autonomous;
 import org.usfirst.frc.team1306.robot.commands.drivetrain.EncoderTesting;
 import org.usfirst.frc.team1306.robot.commands.drivetrain.FollowPath;
 import org.usfirst.frc.team1306.robot.commands.drivetrain.Profile;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousCommand extends CommandGroup {
