@@ -1,10 +1,12 @@
 package org.usfirst.frc.team1306.robot;
 
+import org.usfirst.frc.team1306.robot.triggers.Button;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 /**
- * OI
+ * @OI
  * 
  * This class is the glue that binds the controls on the physical operator interface to the commands and command groups that allow control of the robot.
  * It is also where commands can get joystick/trigger readings and set the rumble on the controller.
@@ -81,221 +83,105 @@ public class OI {
 		
 	}
 	
-	/**
-	 * Joystick axis (x or y)
-	 * @author Sam Roquitte
-	 */
-	public enum axis {x, y};
+	public enum Controller {P,S}; //Controller (primary or secondary)
+	public enum Joystick {L,R}; //Joystick (left or right)
+	public enum Axis {X,Y}; //Joystick axis (x or y)
+	
+	public enum Trigger {L,R}; //Trigger (left or right)
+	
+	public enum Side {L,R}; //Side (left or right) (for rumble)
 	
 	/**
-	 * Controller primary or secondary (p or s)
-	 * @author Sam Roquitte
+	 * Returns the joystick value (from -1.0 to 1.0) for a specified controller's joystick's axis (uses deadband)
 	 */
-	public enum controller {p, s};
-	
-	/**
-	 * Trigger left or right (l or r)
-	 * @author Sam Roquitte
-	 */
-	public enum trigger {l, r};
-	
-	/**
-	 * Joystick left or right (l or r)
-	 * @author Sam Roquitte
-	 */
-	public enum joystick {l, r};
-	
-	/**
-	 * Side left or right (l, r)
-	 * @author Sam Roquitte
-	 */
-	public enum side {l, r};
-	
-	/**
-	 * Returns the joystick value (from -1.0 to 1.0) for the specified controller's joystick's axis (uses deadband)
-	 * @param controller
-	 * 		The controller that you would like to read from (p or s)
-	 * @param joystick
-	 * 		The joystick that you would like to read from (l or r)
-	 * @param axis
-	 * 		The axis that you would like to read (x or y)
-	 * @return
-	 * 		Returns the value of the specified controller's joystick's axis (from -1.0 to 1.0)
-	 */
-	public static double getJoyVal(controller controller, joystick joystick, axis axis) {
-		double returnVal = 0.0;
-		switch (controller) {
-			case p:
-				switch (joystick) {
-					case l:
-						switch (axis) {
-							case x:
-								returnVal = Math.pow(deadband(primaryController.getXNew(Hand.kLeft)), Constants.JOYSTICK_MULTIPLIER);
-							break;
-							default:
-								returnVal = Math.pow(deadband(primaryController.getYNew(Hand.kLeft)), Constants.JOYSTICK_MULTIPLIER);
-							break;
-						}
-					break;
-					default:
-						switch (axis) {
-						case x:
-							returnVal = Math.pow(deadband(primaryController.getXNew(Hand.kRight)), Constants.JOYSTICK_MULTIPLIER);
-						break;
-						default:
-							returnVal = Math.pow(deadband(primaryController.getYNew(Hand.kRight)), Constants.JOYSTICK_MULTIPLIER);
-						break;
-					}
-					break;
-				}
-			break;
-			default:
-				switch (joystick) {
-				case l:
-					switch (axis) {
-						case x:
-							returnVal = Math.pow(deadband(secondaryController.getX(Hand.kLeft)), Constants.JOYSTICK_MULTIPLIER);
-						break;
-						default:
-							returnVal = Math.pow(deadband(secondaryController.getY(Hand.kLeft)), Constants.JOYSTICK_MULTIPLIER);
-						break;
-					}
-				break;
-				default:
-					switch (axis) {
-					case x:
-						returnVal = Math.pow(deadband(secondaryController.getX(Hand.kRight)), Constants.JOYSTICK_MULTIPLIER);
-					break;
-					default:
-						returnVal = Math.pow(deadband(secondaryController.getY(Hand.kRight)), Constants.JOYSTICK_MULTIPLIER);
-					break;
-				}
-				break;
-			}
-			break;
+	public static double getJoyVal(Controller c, Joystick j, Axis a) {
+		
+		XboxController controller;
+		Hand side;
+		
+		if(c.equals(Controller.P)) { controller = primaryController; }
+		else { controller = secondaryController; }
+		if(j.equals(Joystick.L)) { side = Hand.kLeft; }
+		else { side = Hand.kRight; }
+		
+		if(a.equals(Axis.X)) {
+			return Math.pow(deadband(controller.getXNew(side)),Constants.JOYSTICK_MULTIPLIER);
+		} else {
+			return Math.pow(deadband(controller.getYNew(side)),Constants.JOYSTICK_MULTIPLIER);
 		}
-		return returnVal;
 	}
 	
 	/**
 	 * Returns the value of the specified trigger (from 0.0 to 1.0)
-	 * @param controller
-	 * 		Which controller to read (p or s)
-	 * @param trigger
-	 * 		Which trigger to read (l or r)
-	 * @return
-	 * 		Returns the specified value
 	 */
-	public static double getTriggerVal(controller controller, trigger trigger) {
-		double returnVal = 0.0;
-		switch (controller){
-			case p:
-				switch (trigger) {
-					case l:
-						returnVal = primaryController.getLT();
-					break;
-					default:
-						returnVal = primaryController.getRT();
-					break;
-				}
-			break;
-			default:
-				switch (trigger) {
-					case l:
-						returnVal = secondaryController.getLT();
-					break;
-					default:
-						returnVal = secondaryController.getRT();
-					break;
-				}
-			break;
+	public static double getTriggerVal(Controller c, Trigger t) {
+		
+		XboxController controller;
+		if(c.equals(Controller.P)) { controller = primaryController; }
+		else { controller = secondaryController; }
+		
+		if(t.equals(Trigger.L)) {
+			return controller.getLT();
+		} else {
+			return controller.getRT();
 		}
-		return returnVal;
 	}
 	
 	/**.
-	 * Returns the value of a specified button on a controller
-	 * @param controller
-	 * 		The controller that you would like to read from (p or s)
-	 * @param button
-	 * 		The button to read from (A=1 B=2 X=3 Y=4 LB=5 RB=6 Back=7 Start=8 LS=9 RS=10)
+	 * Returns the value of a specified button on a specified controller
 	 */
-	public static boolean getButtonVal(controller controller, int button) {
-		boolean returnVal = false;
-		switch(controller) {
-			case p:
-				returnVal = primaryController.getRawButton(button);
-			break;
-			default:
-				returnVal = secondaryController.getRawButton(button);
-			break;
-		}
-		return returnVal;
+	public static boolean getButtonStatus(Controller c, Button b) {
+		
+		XboxController controller;
+		if(c.equals(Controller.P)) { controller = primaryController; }
+		else { controller = secondaryController; }
+		
+		return controller.getRawButton(b.value);
 	}
 	
 	/**
-	 * Sets the rumble of a controller
-	 * @param controller
-	 * 		Which controller to set rumble
-	 * @param side
-	 * 		Which side (l=left r=right)
-	 * @param rumbleness
-	 * 		RUMBLE!!! (0-1)
+	 * Sets the rumble of a specified controller to a specified amount of rumble
 	 */
-	public static void setRumble(controller controller, side side, double rumbleness) {
-		switch (controller) {
-			case p:
-				switch (side) {
-					case l:
-						primaryController.setRumble(GenericHID.RumbleType.kLeftRumble, rumbleness);
-					break;
-					default:
-						primaryController.setRumble(GenericHID.RumbleType.kRightRumble, rumbleness);
-					break;
-				}
-			break;
-			default:
-				switch (side) {
-				case l:
-					secondaryController.setRumble(GenericHID.RumbleType.kLeftRumble, rumbleness);
-				break;
-				default:
-					secondaryController.setRumble(GenericHID.RumbleType.kRightRumble, rumbleness);
-				break;
-			}
-			break;
+	public static void setRumble(Controller c, Side s, double rumbleness) {
+		
+		XboxController controller;
+		if(c.equals(Controller.P)) { controller = primaryController; }
+		else { controller = secondaryController; }
+		
+		if(s.equals(Side.L)) {
+			controller.setRumble(GenericHID.RumbleType.kLeftRumble, rumbleness);
+		} else {
+			controller.setRumble(GenericHID.RumbleType.kRightRumble, rumbleness);
 		}
 	}
 	
 	/**
-	 * Resets the rumble to 0
-	 * @param controller
-	 * 		Which controller to reset/turn off rumble
+	 * Resets the rumble on the specified side of a specified controller
 	 */
-	public static void resetRumble(controller controller) {
-		switch (controller) {
-			case p:
-				primaryController.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
-				primaryController.setRumble(GenericHID.RumbleType.kRightRumble, 0);
-			break;
-			default:
-				secondaryController.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
-				secondaryController.setRumble(GenericHID.RumbleType.kRightRumble, 0);
-			break;
+	public static void resetRumble(Controller c, Side s) {
+		
+		XboxController controller;
+		if(c.equals(Controller.P)) { controller = primaryController; }
+		else { controller = secondaryController; }
+		
+		if(s.equals(Side.L)) {
+			controller.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
+		} else {
+			controller.setRumble(GenericHID.RumbleType.kRightRumble, 0);
 		}
 	}
 	
 	/**
-	 * Applies deadband to joystick values to prevent false readings when joystick is idle.  It prevents very small changes to 
-	 * an idle joystick to trigger anything.
+	 * Applies deadband to joystick values to prevent false readings when joystick is idle. It prevents 
+	 * very small changes to an idle joystick to trigger anything.
 	 */
 	private static double deadband(double value) {
 		if (value < -Constants.DEADBAND) {
 			return (value + Constants.DEADBAND) / (1.0 - Constants.DEADBAND);
-		}
-		if (value > Constants.DEADBAND) {
+		} else if (value > Constants.DEADBAND) {
 			return (value - Constants.DEADBAND) / (1.0 - Constants.DEADBAND);
+		} else {
+			return 0;
 		}
-		return 0;
 	}
 }

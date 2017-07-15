@@ -11,6 +11,8 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
+ * @CommandBase
+ * 
  * This class is the abstract for all other commands. This static class contains
  * instances of all the subsystems and the oi class so that each command that
  * extends this class can have access to the subsystems.
@@ -37,7 +39,7 @@ public abstract class CommandBase extends Command {
 		driveConfig.add(Device.ENCODER); //Adding encoders to the config
 		driveConfig.add(Device.GYRO); //Adding a gyro to the config
 		
-		driveConfig.setDriveMode(DriveMode.ARCADE);;
+		driveConfig.setDriveMode(DriveMode.ARCADE);
 		
 		drivetrain = new Drivetrain(driveConfig);
 		oi = new OI(); //OI is always initialized last
