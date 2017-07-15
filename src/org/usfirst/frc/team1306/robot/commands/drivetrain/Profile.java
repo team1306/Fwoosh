@@ -6,18 +6,16 @@ public class Profile {
 
 	public double maxTime;
 	public ArrayList<Point> path;
-	private ArrayList<Point> mirrorPath;
-	private double distance, maxVelocity, maxAcceleration, maxJerk;
 	
 	public Profile(double d, double v, double a, double j, double t) {
-		distance = d;
-		maxVelocity = v;
-		maxAcceleration = a;
-		maxJerk = j;
-		maxTime = t;
+		double distance = d;
+		double maxVelocity = v;
+		double maxAcceleration = a;
+		double maxJerk = j;
+		double maxTime = t;
 
+		ArrayList<Point> mirrorPath = new ArrayList<Point>();
 		path = new ArrayList<Point>();
-		mirrorPath = new ArrayList<Point>();
 		
 		ProfileStatus status = ProfileStatus.ACCELERATING;
 		ProfileSubStatus subStatus = ProfileSubStatus.ACCEL_RAMP_UP;
@@ -35,9 +33,6 @@ public class Profile {
 		for(int i = 1; i < maxSteps; i++) {
 		
 			Point prevPoint = path.get(i - 1);
-//			System.out.println("PreMirror" + accelPreMirrorCounter);
-//			System.out.println("PostMirror" + accelPostMirrorCounter);
-//			System.out.println(mirroring);
 			
 			if(prevPoint.acceleration > maxAcceleration) {
 				subStatus = ProfileSubStatus.ACCEL_HOLD;

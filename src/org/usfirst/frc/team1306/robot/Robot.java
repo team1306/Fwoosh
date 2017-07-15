@@ -22,8 +22,8 @@ import org.usfirst.frc.team1306.robot.commands.autonomous.AutonomousCommand.Auto
  */
 public class Robot extends IterativeRobot {
 
-	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	private Command autonomousCommand;
+	private SendableChooser<Command> chooser = new SendableChooser<>();
 	
 	/**
 	 * This function is run when the robot is first started up and we use it for
@@ -45,13 +45,8 @@ public class Robot extends IterativeRobot {
 	}
 
 	/**
-	 * This function is called once each time the robot becomes disabled.
+	 * This function is called continuously while the robot is disabled
 	 */
-	@Override
-	public void disabledInit() {
-
-	}
-
 	@Override
 	public void disabledPeriodic() {
 		SmartDashboard.putString("STATUS:","DISABLED");
@@ -59,7 +54,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	/**
-	 * This function is called once each time the robot enters autonomous.
+	 * This function is called once each time the robot enters autonomous
 	 */
 	@Override
 	public void autonomousInit() {
@@ -71,7 +66,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	/**
-	 * This function is called periodically during autonomous.
+	 * This function is called continuously during autonomous
 	 */
 	@Override
 	public void autonomousPeriodic() {
@@ -80,7 +75,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	/**
-	 * This function is called once the robot enters the driver controlled period.
+	 * This function is called once the robot enters the driver controlled period
 	 */
 	@Override
 	public void teleopInit() {
@@ -91,7 +86,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	/**
-	 * This function is called periodically during the driver controlled period.
+	 * This function is called continuously while the robot is under operator control
 	 */
 	@Override
 	public void teleopPeriodic() {
@@ -100,7 +95,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	/**
-	 * This function is called periodically during test mode.
+	 * This function is called continuosly during test mode which is started through the driverstation
 	 */
 	@Override
 	public void testPeriodic() {

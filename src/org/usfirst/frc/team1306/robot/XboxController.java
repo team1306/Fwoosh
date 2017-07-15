@@ -9,6 +9,27 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class XboxController extends Joystick {
 
+	/** The A button index */
+	public final static int A = 1;
+	/** The B button index */
+	public final static int B = 2;
+	/** The X button index */
+	public final static int X = 3;
+	/** The Y button index */
+	public final static int Y = 4;
+	/** The LB button index */
+	public final static int LB = 5;
+	/** The RB button index */
+	public final static int RB = 6;
+	/** The BACK button index */
+	public final static int BACK = 7;
+	/** The START button index */
+	public final static int START = 8;
+	/** The LS button index */
+	public final static int LS = 9;
+	/** The RS button index */
+	public final static int RS = 10;
+	
 	/**
 	 * Creates a new XboxController connected to the specified port.
 	 * 
@@ -99,24 +120,4 @@ public class XboxController extends Joystick {
 		return super.getPOV();
 	}
 	
-	/** The A button index */
-	public final static int A = 1;
-	/** The B button index */
-	public final static int B = 2;
-	/** The X button index */
-	public final static int X = 3;
-	/** The Y button index */
-	public final static int Y = 4;
-	/** The LB button index */
-	public final static int LB = 5;
-	/** The RB button index */
-	public final static int RB = 6;
-	/** The BACK button index */
-	public final static int BACK = 7;
-	/** The START button index */
-	public final static int START = 8;
-	/** The LS button index */
-	public final static int LS = 9;
-	/** The RS button index */
-	public final static int RS = 10;
 }

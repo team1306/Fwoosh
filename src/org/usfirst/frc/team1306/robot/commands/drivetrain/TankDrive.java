@@ -19,11 +19,6 @@ public class TankDrive extends CommandBase {
 	}
 
 	@Override
-	protected void initialize() {
-
-	}
-
-	@Override
 	protected void execute() {
 
 		/**
@@ -53,6 +48,6 @@ public class TankDrive extends CommandBase {
 
 	@Override
 	protected void interrupted() {
-		
+		end();
 	}
 }

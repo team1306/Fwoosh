@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 public class OI {
 	
 	//Declare primary and secondary xbox controllers
-	private static XboxController primaryController = null;
-	private static XboxController secondaryController = null;
+	private static XboxController primaryController;
+	private static XboxController secondaryController;
 	
 	//Declare buttons on primary controller
 //	private final Button pbuttonA;
@@ -132,41 +132,41 @@ public class OI {
 							case x:
 								returnVal = Math.pow(deadband(primaryController.getXNew(Hand.kLeft)), Constants.JOYSTICK_MULTIPLIER);
 							break;
-							case y:
+							default:
 								returnVal = Math.pow(deadband(primaryController.getYNew(Hand.kLeft)), Constants.JOYSTICK_MULTIPLIER);
 							break;
 						}
 					break;
-					case r:
+					default:
 						switch (axis) {
 						case x:
 							returnVal = Math.pow(deadband(primaryController.getXNew(Hand.kRight)), Constants.JOYSTICK_MULTIPLIER);
 						break;
-						case y:
+						default:
 							returnVal = Math.pow(deadband(primaryController.getYNew(Hand.kRight)), Constants.JOYSTICK_MULTIPLIER);
 						break;
 					}
 					break;
 				}
 			break;
-			case s:
+			default:
 				switch (joystick) {
 				case l:
 					switch (axis) {
 						case x:
 							returnVal = Math.pow(deadband(secondaryController.getX(Hand.kLeft)), Constants.JOYSTICK_MULTIPLIER);
 						break;
-						case y:
+						default:
 							returnVal = Math.pow(deadband(secondaryController.getY(Hand.kLeft)), Constants.JOYSTICK_MULTIPLIER);
 						break;
 					}
 				break;
-				case r:
+				default:
 					switch (axis) {
 					case x:
 						returnVal = Math.pow(deadband(secondaryController.getX(Hand.kRight)), Constants.JOYSTICK_MULTIPLIER);
 					break;
-					case y:
+					default:
 						returnVal = Math.pow(deadband(secondaryController.getY(Hand.kRight)), Constants.JOYSTICK_MULTIPLIER);
 					break;
 				}
@@ -194,17 +194,17 @@ public class OI {
 					case l:
 						returnVal = primaryController.getLT();
 					break;
-					case r:
+					default:
 						returnVal = primaryController.getRT();
 					break;
 				}
 			break;
-			case s:
+			default:
 				switch (trigger) {
 					case l:
 						returnVal = secondaryController.getLT();
 					break;
-					case r:
+					default:
 						returnVal = secondaryController.getRT();
 					break;
 				}
@@ -226,7 +226,7 @@ public class OI {
 			case p:
 				returnVal = primaryController.getRawButton(button);
 			break;
-			case s:
+			default:
 				returnVal = secondaryController.getRawButton(button);
 			break;
 		}
@@ -249,17 +249,17 @@ public class OI {
 					case l:
 						primaryController.setRumble(GenericHID.RumbleType.kLeftRumble, rumbleness);
 					break;
-					case r:
+					default:
 						primaryController.setRumble(GenericHID.RumbleType.kRightRumble, rumbleness);
 					break;
 				}
 			break;
-			case s:
+			default:
 				switch (side) {
 				case l:
 					secondaryController.setRumble(GenericHID.RumbleType.kLeftRumble, rumbleness);
 				break;
-				case r:
+				default:
 					secondaryController.setRumble(GenericHID.RumbleType.kRightRumble, rumbleness);
 				break;
 			}
@@ -278,7 +278,7 @@ public class OI {
 				primaryController.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
 				primaryController.setRumble(GenericHID.RumbleType.kRightRumble, 0);
 			break;
-			case s:
+			default:
 				secondaryController.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
 				secondaryController.setRumble(GenericHID.RumbleType.kRightRumble, 0);
 			break;

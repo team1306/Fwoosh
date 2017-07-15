@@ -5,7 +5,7 @@ import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 
 /**
- * Settings
+ * @Settings
  * 
  * This class manages and stores all the drivetrain settings.
  * @author Jackson Goth

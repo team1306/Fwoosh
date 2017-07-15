@@ -5,21 +5,24 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 
 /**
- * Gyro
+ * @Gyro
  * 
- * 
+ * This class is the key to accessing information from any type of gyro. If you want to switch between different
+ * gyros, just create this object with a different gyrotype.  All methods will react accordingly and return values from
+ * the correct kind of gyro.
  * @author Jackson Goth
  */
 public class Gyro {
 
-	private AnalogDevicesGyro ad_imu;
-	private AHRS navx;
-	public GyroType currentGyro;
+	private AnalogDevicesGyro ad_imu; //For using ADIS16448
+	private AHRS navx; //For using NavX
+	public GyroType currentGyro; //What gyro the robot is using, used by other classes
 	
 	public Gyro(GyroType type) {
 		
 		currentGyro = type;
 		
+		/* Initializes the correct gyro */
 		if(type.equals(GyroType.AD_IMU)) {
 			ad_imu = new AnalogDevicesGyro();
 		} else if(type.equals(GyroType.NAVX)) {
@@ -34,14 +37,20 @@ public class Gyro {
 		}
 	}
 	
+	/**
+	 * Returns angle/yaw from correct gyro
+	 */
 	public double getAngle() {
-		if(currentGyro.equals(GyroType.NAVX)) { //Try getCompassHeading()
+		if(currentGyro.equals(GyroType.NAVX)) {
 			return navx.getAngle();
 		} else {
 			return ad_imu.getAngle();
 		}
 	}
 	
+	/**
+	 * Returns displacement from navx, or -1 from ad_imu because it doesn't have that functionality
+	 */
 	public double getDisplacement(Axis axis) {
 		if(currentGyro.equals(GyroType.NAVX)) {
 			if(axis.equals(Axis.X)) {
@@ -56,5 +65,5 @@ public class Gyro {
 		}
 	}
 	
-	public enum Axis {X,Y,Z};
+	public enum Axis {X,Y,Z}; //Enum used to store possible axis for dislacement acquisition
 }

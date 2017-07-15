@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1306.lib.util;
 
 /**
- * PIDParameters
+ * @PIDParameters
  * 
  * This class allows you to make an object that can easily store a set of PIDF or PID parameters for a subsystem
  * @author Jackson Goth

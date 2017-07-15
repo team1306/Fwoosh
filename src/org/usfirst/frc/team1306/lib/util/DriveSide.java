@@ -7,7 +7,7 @@ import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
 /**
- * DriveSide
+ * @DriveSide
  * 
  * This object contains one side of the drivetrain (either left or right), and it's purpose is to make adding/removing motor controllers
  * from the drivetrain subsystem much faster/easier in code. To adjust the number of motor controllers all you have to do is change a few lines of code
@@ -19,15 +19,14 @@ import com.ctre.CANTalon.TalonControlMode;
 public class DriveSide {
 
 	public CANTalon master; //Talon that is adjusted, and from which other talons imitate
-	private ArrayList<CANTalon> talons; //All talons for this side of the drivetrain
 	
 	/**
 	 * Makes a new DriveSide with a given array filled with the side's corresponding talons
 	 */
-	public DriveSide(ArrayList<CANTalon> talons) {
+	public DriveSide(ArrayList<CANTalon> t) {
 		
-		this.talons = new ArrayList<CANTalon>();
-		this.talons = talons;
+		ArrayList<CANTalon> talons = new ArrayList<CANTalon>();
+		talons = t;  //All talons for this side of the drivetrain
 		
 		if(talons.size() > 0) { //If there are any talons at all...
 			
@@ -38,9 +37,9 @@ public class DriveSide {
 			master.enable();
 			
 			for(int i = 1; i < talons.size(); i++) { //Sets every other talon as a follower of the master talon
-				this.talons.get(i).changeControlMode(TalonControlMode.Follower);
-				this.talons.get(i).set(master.getDeviceID());
-				this.talons.get(i).enable();
+				talons.get(i).changeControlMode(TalonControlMode.Follower);
+				talons.get(i).set(master.getDeviceID());
+				talons.get(i).enable();
 			}
 		}
 	}

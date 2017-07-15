@@ -12,10 +12,6 @@ public class SmartDashboardUpdate extends CommandBase {
 	}
 	
 	@Override
-	protected void initialize() {
-	}
-
-	@Override
 	protected void execute() {
 		
 		if(Constants.GYRO_DEBUG) {
@@ -38,15 +34,5 @@ public class SmartDashboardUpdate extends CommandBase {
 	@Override
 	protected boolean isFinished() {
 		return false;
-	}
-
-	@Override
-	protected void end() {
-		
-	}
-
-	@Override
-	protected void interrupted() {
-		
 	}
 }

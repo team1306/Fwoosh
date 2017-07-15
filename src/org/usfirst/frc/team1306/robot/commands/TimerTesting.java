@@ -23,14 +23,5 @@ public class TimerTesting extends CommandBase {
 	protected boolean isFinished() {
 		return false;
 	}
-
-	@Override
-	protected void end() {
-		
-	}
-
-	@Override
-	protected void interrupted() {
-		
-	}
+	
 }
