@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1306.lib.util;
 
 import java.util.ArrayList;
-import org.usfirst.frc.team1306.lib.util.Settings.EncoderType;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
@@ -59,9 +58,9 @@ public class DriveSide {
 	}
 
 	/**
-	 * Initializes the drive encoder based on what type of encoder it is
+	 * Initializes the drive encoders (Currently set-up to initialize Grayhill encoders)
 	 */
-	public void initEncoders(EncoderType type) {
+	public void initEncoders() {
 		
 		master.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		master.configEncoderCodesPerRev(256);
@@ -69,15 +68,6 @@ public class DriveSide {
 		master.configPeakOutputVoltage(+12.0f, -12.0f);
 		
 		master.setEncPosition(0);
-		
-		/* TODO Code below in current form doesn't work, maybe make an encoder initialization class for all subsystems */ 
-//		master.setFeedbackDevice(type.device);
-//		if(!type.equals(EncoderType.CTRE_MAG)) {
-//			master.configEncoderCodesPerRev(type.codesRev);
-//		}
-//		master.configNominalOutputVoltage(type.nominalForwardVoltage,type.nominalReverseVoltage); 
-//		master.configPeakOutputVoltage(type.peakForwardVoltage,type.peakReverseVoltage);
-//		master.setEncPosition(0);
 	}
 	
 	/**

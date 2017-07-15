@@ -59,7 +59,10 @@ public class Profile {
 				profileMirrorStopPoint = mirrorPath.size();
 			}
 			
-			double position = 0, velocity = 0, acceleration = 0, jerk = 0;
+			double position;
+			double velocity;
+			double acceleration = 0;
+			double jerk = 0;
 			
 			if(status.equals(ProfileStatus.ACCELERATING)) {
 				if(subStatus.equals(ProfileSubStatus.ACCEL_RAMP_UP)) {

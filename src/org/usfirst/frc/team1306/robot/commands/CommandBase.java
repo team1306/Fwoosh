@@ -1,8 +1,8 @@
 package org.usfirst.frc.team1306.robot.commands;
 
 import org.usfirst.frc.team1306.lib.util.Settings;
-import org.usfirst.frc.team1306.lib.util.Settings.EncoderType;
-import org.usfirst.frc.team1306.lib.util.Settings.GyroType;
+import org.usfirst.frc.team1306.lib.util.Settings.Device;
+import org.usfirst.frc.team1306.lib.util.Settings.DriveMode;
 import org.usfirst.frc.team1306.lib.util.Settings.TalonType;
 import org.usfirst.frc.team1306.robot.OI;
 import org.usfirst.frc.team1306.robot.RobotMap;
@@ -34,8 +34,10 @@ public abstract class CommandBase extends Command {
 		driveConfig.add(new CANTalon(RobotMap.LEFT_TALON_2_PORT),TalonType.LEFT_SLAVE);
 		driveConfig.add(new CANTalon(RobotMap.RIGHT_TALON_2_PORT),TalonType.RIGHT_SLAVE);
 		
-		driveConfig.add(EncoderType.GRAYHILL); //Adding encoders to the config
-		driveConfig.add(GyroType.NAVX); //Adding a gyro to the config
+		driveConfig.add(Device.ENCODER); //Adding encoders to the config
+		driveConfig.add(Device.GYRO); //Adding a gyro to the config
+		
+		driveConfig.setDriveMode(DriveMode.ARCADE);;
 		
 		drivetrain = new Drivetrain(driveConfig);
 		oi = new OI(); //OI is always initialized last

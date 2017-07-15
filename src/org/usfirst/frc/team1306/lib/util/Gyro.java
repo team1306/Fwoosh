@@ -1,67 +1,53 @@
 package org.usfirst.frc.team1306.lib.util;
 
-import org.usfirst.frc.team1306.lib.util.Settings.GyroType;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 
 /**
  * @Gyro
  * 
- * This class is the key to accessing information from any type of gyro. If you want to switch between different
- * gyros, just create this object with a different gyrotype.  All methods will react accordingly and return values from
- * the correct kind of gyro.
+ * This class holds the gyro object and is meant make accessing data from the navx easier and more organized.
  * @author Jackson Goth
  */
 public class Gyro {
 
-	private AnalogDevicesGyro ad_imu; //For using ADIS16448
-	private AHRS navx; //For using NavX
-	public GyroType currentGyro; //What gyro the robot is using, used by other classes
+	private AHRS navx; //Gyro we use, navX Sensor
 	
-	public Gyro(GyroType type) {
-		
-		currentGyro = type;
-		
-		/* Initializes the correct gyro */
-		if(type.equals(GyroType.AD_IMU)) {
-			ad_imu = new AnalogDevicesGyro();
-		} else if(type.equals(GyroType.NAVX)) {
-			try {
-				navx = new AHRS(SPI.Port.kMXP);
-				navx.reset();
-				navx.resetDisplacement();
-				navx.zeroYaw();
-			} catch(RuntimeException ex) {
-				
-			}
+	public Gyro() {
+		try {
+			navx = new AHRS(SPI.Port.kMXP);
+			
+			navx.reset(); //Resets Yaw
+			navx.resetDisplacement(); //Resets displacement
+		} catch(RuntimeException ex) {
+			
 		}
 	}
 	
 	/**
-	 * Returns angle/yaw from correct gyro
+	 * Returns total accumulated yaw value in degrees
 	 */
 	public double getAngle() {
-		if(currentGyro.equals(GyroType.NAVX)) {
-			return navx.getAngle();
-		} else {
-			return ad_imu.getAngle();
-		}
+		return navx.getAngle();
 	}
 	
 	/**
-	 * Returns displacement from navx, or -1 from ad_imu because it doesn't have that functionality
+	 * Returns current yaw value (-180 to 180 degrees only)
+	 */
+	public double getYaw() {
+		return navx.getYaw();
+	}
+	
+	/**
+	 * Returns displacement from navx along a given axis
 	 */
 	public double getDisplacement(Axis axis) {
-		if(currentGyro.equals(GyroType.NAVX)) {
-			if(axis.equals(Axis.X)) {
-				return navx.getDisplacementX();
-			} else if(axis.equals(Axis.Y)) {
-				return navx.getDisplacementY();
-			} else {
-				return navx.getDisplacementZ();
-			}
+		if(axis.equals(Axis.X)) {
+			return navx.getDisplacementX();
+		} else if(axis.equals(Axis.Y)) {
+			return navx.getDisplacementY();
 		} else {
-			return -1;
+			return navx.getDisplacementZ();
 		}
 	}
 	

@@ -2,30 +2,33 @@ package org.usfirst.frc.team1306.lib.util;
 
 import java.util.ArrayList;
 import com.ctre.CANTalon;
-import com.ctre.CANTalon.FeedbackDevice;
 
 /**
  * @Settings
  * 
- * This class manages and stores all the drivetrain settings.
+ * This class manages and stores all the drivetrain settings. It's purpose is so you can modularly add the 
+ * gyro, encoders, and new talons with ease. This makes changing out code/electrical components a lot faster 
+ * on the fly and keeps everything organized.
+ * 
  * @author Jackson Goth
  */
 public class Settings {
 
 	public Gyro gyro;
-	public ArrayList<CANTalon> leftSide, rightSide;
-	public boolean encoderPresent = false;
-	public boolean gyroPresent = false;
-	public EncoderType encoderType;
-	public DriveMode controlMode;
+	public ArrayList<CANTalon> leftSide, rightSide; //Talons on each side of drivetrain
+	public boolean encodersPresent = false; //If we need to initialize encoders
+	public DriveMode driveMode; //ArcadeDrive, TankDrive, OutreachDrive?
 	
 	public Settings() {
 		leftSide = new ArrayList<CANTalon>();
 		rightSide = new ArrayList<CANTalon>();
 		
-		controlMode = DriveMode.ARCADE;
+		driveMode = DriveMode.ARCADE; //Default control mode is arcade.
 	}
 	
+	/**
+	 * Adds a new talon to a specified driveside with a specified type (master or slave)
+	 */
 	public void add(CANTalon talon, TalonType type) {
 		if(type.equals(TalonType.LEFT_MASTER)) {
 			leftSide.add(0,talon);
@@ -38,35 +41,25 @@ public class Settings {
 		}
 	}
 	
-	public void add(GyroType type) {
-		gyroPresent = true;
-		gyro = new Gyro(type);
-	}
-	
-	public void add(EncoderType type) {
-		encoderPresent = true;
-		encoderType = type;
-	}
-	
-	public enum EncoderType {
-		
-		GRAYHILL(FeedbackDevice.QuadEncoder,256),
-		RS7(FeedbackDevice.QuadEncoder,12), 
-		CTRE_MAG(FeedbackDevice.CtreMagEncoder_Relative,-1);
-		
-		FeedbackDevice device;
-		double nominalForwardVoltage = +0.0f, nominalReverseVoltage = -0.0f; //TODO Make this subsystem specialized
-		double peakForwardVoltage = +12.0f, peakReverseVoltage = -12.0f; //TODO Same as above
-		int codesRev;
-		
-		private EncoderType(FeedbackDevice d, int cR) {
-			this.device = d;
-			this.codesRev = cR;
+	/**
+	 * Adds a new device to the drivetrain (gyro or encoders)
+	 */
+	public void add(Device device) {
+		if(device.equals(Device.GYRO)) {
+			gyro = new Gyro();
+		} else if(device.equals(Device.ENCODER)) {
+			encodersPresent = true;
 		}
-		
-	};
+	}
 	
-	public enum GyroType {NAVX, AD_IMU};
+	/**
+	 * Sets the drivemode to a given drivemode (Arcade, Tank, Outreach)
+	 */
+	public void setDriveMode(DriveMode mode) {
+		driveMode = mode;
+	}
+	
+	public enum Device {GYRO, ENCODER}; //Device types
 	
 	public enum TalonType {LEFT_MASTER, RIGHT_MASTER, LEFT_SLAVE, RIGHT_SLAVE};
 	

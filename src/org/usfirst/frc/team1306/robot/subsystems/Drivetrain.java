@@ -8,10 +8,11 @@ import org.usfirst.frc.team1306.robot.Constants;
 import org.usfirst.frc.team1306.robot.commands.drivetrain.EncoderTesting;
 import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * The Drivetrain Subsystem. This subsystem is initialzed with a set of Settings provided from the CommandBase.
+ * @Drivetrain
+ * 
+ * This subsystem is initialzed with a set of Settings provided from the CommandBase.
  * It uses that configuration to set-up sensors and the control mode for the driver, as well as putting each
  * side of the drivetrain into a seperate DriveSide object with the appropriate amount of Talons SRXs to control.
  * 
@@ -28,20 +29,17 @@ public class Drivetrain extends Subsystem {
 		leftMotors = new DriveSide(settings.leftSide);
 		rightMotors = new DriveSide(settings.rightSide);
 		
-		mode = settings.controlMode;
+		mode = settings.driveMode; //Drivetrain configuration (talons, gyro, encoders)
 		
-		if(settings.gyroPresent) {
+		/* If gyro is present, makes it accessible */
+		if(settings.gyro != null) {
 			gyro = settings.gyro;
 		}
 		
-		if(settings.encoderPresent) {
-			leftMotors.initEncoders(settings.encoderType);
-//			leftMotors.flipEncoderOutput(false); TODO Commented out until I fix bugs with encoder initialization
-//			leftMotors.flipLoopOutput(false);
-			
-			rightMotors.initEncoders(settings.encoderType);
-//			rightMotors.flipEncoderOutput(true); //TODO Flip this back to true
-//			rightMotors.flipLoopOutput(true); //TODO Same as above
+		/* If encoders are present, initialized them in appropriate driveside */
+		if(settings.encodersPresent) {
+			leftMotors.initEncoders();
+			rightMotors.initEncoders();
 		}
 	}
 
@@ -68,9 +66,6 @@ public class Drivetrain extends Subsystem {
 	public void driveSpeed(double leftVal, double rightVal) {
 		leftMotors.changeControlMode(TalonControlMode.Speed);
 		rightMotors.changeControlMode(TalonControlMode.Speed);
-
-		SmartDashboard.putNumber("leftVal",leftVal);
-		SmartDashboard.putNumber("rightval",rightVal);
 		
 		if(Constants.DRIVETRAIN_ENABLED) {
 			leftMotors.set(leftVal);
