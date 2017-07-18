@@ -37,7 +37,7 @@ public class Robot extends IterativeRobot {
 		//CameraServer.getInstance().startAutomaticCapture("usb",0); //Camera 1
 		
 		chooser.addObject("Follow Path", new AutonomousCommand(AutoMode.FOLLOW_PATH));
-		chooser.addObject("NewAuto", new AutonomousCommand(AutoMode.NEW_AUTO));
+		chooser.addObject("NewAuto", new AutonomousCommand(AutoMode.TESTING));
 		chooser.addDefault("Do Nothing", new AutonomousCommand(AutoMode.DO_NOTHING));
 		SmartDashboard.putData("Auto mode", chooser);
 		

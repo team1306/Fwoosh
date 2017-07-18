@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * FollowPath
+ * @FollowPath
  * 
  * This command is meant to drive the robot along a given path/profile and applies a P-loop to how far the drivetrain is off from the path.
  * @author Jackson Goth

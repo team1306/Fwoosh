@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1306.robot;
 
 import org.usfirst.frc.team1306.robot.triggers.Button;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 
@@ -105,9 +104,9 @@ public class OI {
 		else { side = Hand.kRight; }
 		
 		if(a.equals(Axis.X)) {
-			return Math.pow(deadband(controller.getXNew(side)),Constants.JOYSTICK_MULTIPLIER);
+			return Math.pow(deadband(controller.getXAxis(side)),Constants.JOYSTICK_MULTIPLIER);
 		} else {
-			return Math.pow(deadband(controller.getYNew(side)),Constants.JOYSTICK_MULTIPLIER);
+			return Math.pow(deadband(controller.getYAxis(side)),Constants.JOYSTICK_MULTIPLIER);
 		}
 	}
 	
@@ -169,6 +168,10 @@ public class OI {
 		} else {
 			controller.setRumble(GenericHID.RumbleType.kRightRumble, 0);
 		}
+	}
+	
+	public static double getTriggerStatus() {
+		return primaryController.getLT();
 	}
 	
 	/**

@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1306.robot.triggers;
 
 import org.usfirst.frc.team1306.robot.XboxController;
-
 import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
