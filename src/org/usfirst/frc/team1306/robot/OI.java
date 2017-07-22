@@ -1,8 +1,13 @@
 package org.usfirst.frc.team1306.robot;
 
-import org.usfirst.frc.team1306.robot.triggers.Button;
+import org.usfirst.frc.team1306.robot.commands.SmartDashboardUpdate;
+import org.usfirst.frc.team1306.robot.commands.drivetrain.DriveTest;
+import org.usfirst.frc.team1306.robot.triggers.ControllerButton;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * @OI
@@ -15,12 +20,12 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 public class OI {
 	
 	//Declare primary and secondary xbox controllers
-	private static XboxController primaryController;
-	private static XboxController secondaryController;
+	private static XboxController primaryController = null;
+	private static XboxController secondaryController = null;
 	
 	//Declare buttons on primary controller
-//	private final Button pbuttonA;
-//	private final Button pbuttonB;
+	private final Button pbuttonA;
+	private final Button pbuttonB;
 //	private final Button pbuttonX;
 //	private final Button pbuttonY;
 //	private final Button pbuttonRB;
@@ -53,8 +58,8 @@ public class OI {
 		secondaryController = new XboxController(RobotMap.SECONDARY_PORT);
 		
 		//Map buttons to xbox controller buttons for primary controller
-//		pbuttonA = new JoystickButton(primaryController, XboxController.A);
-//		pbuttonB = new JoystickButton(primaryController, XboxController.B);
+		pbuttonA = new JoystickButton(primaryController, ControllerButton.A.value);
+		pbuttonB = new JoystickButton(primaryController, ControllerButton.B.value);
 //		pbuttonX = new JoystickButton(primaryController, XboxController.X);
 //		pbuttonY = new JoystickButton(primaryController, XboxController.Y);
 //		pbuttonRB = new JoystickButton(primaryController, XboxController.RB);
@@ -75,11 +80,13 @@ public class OI {
 //		sbuttonLB = new JoystickButton(secondaryController, XboxController.LB);
 //		sbuttonStart = new JoystickButton(secondaryController, XboxController.START);
 //		sbuttonBack = new JoystickButton(secondaryController, XboxController.BACK);
-//		secondaryDPadUp = new DPadPress(secondaryController, DPadDirection.UP);
+//		secondaryDPadUp = new DPadPress(secondaryControlsler, DPadDirection.UP);
 //		secondaryDPadRight = new DPadPress(secondaryController, DPadDirection.RIGHT);
 //		secondaryDPadLeft = new DPadPress(secondaryController, DPadDirection.LEFT);
 //		secondaryDPadDown = new DPadPress(secondaryController, DPadDirection.DOWN);
-		
+	
+		pbuttonA.whenPressed(new DriveTest());
+		pbuttonB.whenPressed(new SmartDashboardUpdate());
 	}
 	
 	public enum Controller {P,S}; //Controller (primary or secondary)
@@ -129,7 +136,7 @@ public class OI {
 	/**.
 	 * Returns the value of a specified button on a specified controller
 	 */
-	public static boolean getButtonStatus(Controller c, Button b) {
+	public static boolean getButtonStatus(Controller c, ControllerButton b) {
 		
 		XboxController controller;
 		if(c.equals(Controller.P)) { controller = primaryController; }

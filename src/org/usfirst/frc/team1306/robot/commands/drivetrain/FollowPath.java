@@ -16,6 +16,7 @@ public class FollowPath extends CommandBase {
 	private Profile profile;
 	private Timer timer;
 	private int counter;
+	private double initAngle;
 	
 	public FollowPath(Profile p) {
 		requires(drivetrain);
@@ -37,6 +38,7 @@ public class FollowPath extends CommandBase {
 		drivetrain.rightMotors.setEncPos(0);
 		
 		counter = 0; //Resets counter that's used to determine position in profile
+		initAngle = drivetrain.gyro.getAngle();
 	}
 
 	@Override
@@ -47,14 +49,20 @@ public class FollowPath extends CommandBase {
 		double speed = profile.path.get(counter).velocity;
 		double leftError = profile.path.get(counter).position - (Math.abs(drivetrain.leftMotors.getEncPos()/1024)*12.5663);
 		double rightError = profile.path.get(counter).position - (Math.abs(drivetrain.rightMotors.getEncPos()/1024)*12.5663);
-		double leftAdj = leftError * 1.2;
-		double rightAdj = rightError * 1.2;
+		double leftAdj = leftError * 2.25;
+		double rightAdj = rightError * 2.25;
 		
+		double angleError = (drivetrain.gyro.getAngle() - initAngle) * 9;
+		
+		SmartDashboard.putNumber("angleError", angleError);
+		
+		SmartDashboard.putNumber("timer", timer.get());
+		SmartDashboard.putNumber("speed",speed);
+		SmartDashboard.putNumber("counter",counter);
 		SmartDashboard.putNumber("leftError",leftError);
 		SmartDashboard.putNumber("rightError",rightError);
 		
-		drivetrain.driveSpeed(((speed+leftAdj)/12.5663)*60,((speed+rightAdj)/12.5663)*60);
-//		counter++;
+		drivetrain.driveSpeed((((speed+leftAdj)/12.5663)*60)-angleError,(((speed+rightAdj)/12.5663)*60)+angleError);
 	}
 
 	@Override

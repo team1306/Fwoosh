@@ -8,7 +8,6 @@ public class SmartDashboardUpdate extends CommandBase {
 	
 	public SmartDashboardUpdate() {
 		setRunWhenDisabled(true);
-		requires(drivetrain);
 	}
 	
 	@Override
@@ -24,8 +23,8 @@ public class SmartDashboardUpdate extends CommandBase {
 		if(Constants.DRIVETRAIN_DEBUG) {
 			SmartDashboard.putNumber("LeftSide-Position:",drivetrain.leftMotors.getEncPos());
 			SmartDashboard.putNumber("RightSide-Position:",drivetrain.rightMotors.getEncPos());
-			SmartDashboard.putNumber("LeftSide-AdjustPos:",drivetrain.leftMotors.getEncPos() * Constants.ENCODER_CONVERSION);
-			SmartDashboard.putNumber("RightSide-AdjustPos:",drivetrain.rightMotors.getEncPos() * Constants.ENCODER_CONVERSION);
+			SmartDashboard.putNumber("LeftSide-AdjustPos:",Math.abs(drivetrain.leftMotors.getEncPos()/1024)*12.5663);
+			SmartDashboard.putNumber("RightSide-AdjustPos:",Math.abs(drivetrain.rightMotors.getEncPos()/1024)*12.5663);
 			SmartDashboard.putNumber("LeftSide-Velocity:",drivetrain.leftMotors.getEncVel());
 			SmartDashboard.putNumber("RightSide-Velocity:",drivetrain.rightMotors.getEncVel());
 		}
@@ -34,5 +33,15 @@ public class SmartDashboardUpdate extends CommandBase {
 	@Override
 	protected boolean isFinished() {
 		return false;
+	}
+
+	@Override
+	protected void end() {
+		
+	}
+
+	@Override
+	protected void interrupted() {
+		
 	}
 }

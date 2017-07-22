@@ -5,9 +5,10 @@ import org.usfirst.frc.team1306.lib.util.Gyro;
 import org.usfirst.frc.team1306.lib.util.Settings;
 import org.usfirst.frc.team1306.lib.util.Settings.DriveMode;
 import org.usfirst.frc.team1306.robot.Constants;
-import org.usfirst.frc.team1306.robot.commands.drivetrain.EncoderTesting;
+import org.usfirst.frc.team1306.robot.commands.drivetrain.Drive;
 import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * @Drivetrain
@@ -52,6 +53,9 @@ public class Drivetrain extends Subsystem {
 		leftMotors.changeControlMode(TalonControlMode.PercentVbus);
 		rightMotors.changeControlMode(TalonControlMode.PercentVbus);
 
+		SmartDashboard.putNumber("leftVbus",leftVal);
+		SmartDashboard.putNumber("rightVbus",rightVal);
+		
 		if(Constants.DRIVETRAIN_ENABLED) {
 			leftMotors.set(leftVal);
 			rightMotors.set(-rightVal); 
@@ -85,6 +89,6 @@ public class Drivetrain extends Subsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new EncoderTesting());
+		setDefaultCommand(new Drive());
 	}
 }

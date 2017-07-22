@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Profile {
 
-	public double maxTime;
+	public double maxTime = 15;
 	public ArrayList<Point> path;
 	
 	public Profile(double d, double v, double a, double j, double t) {
