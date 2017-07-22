@@ -13,6 +13,7 @@ public class AutonomousCommand extends CommandGroup {
 
 		if(mode.equals(AutoMode.FOLLOW_PATH)) {
 			
+			addSequential(new FollowPath(new Profile(96,18.25,45,45,15))); //Distance, Velocity, Accel, Jerk, Time
 		} 
 		else if(mode.equals(AutoMode.TESTING)) {
 
