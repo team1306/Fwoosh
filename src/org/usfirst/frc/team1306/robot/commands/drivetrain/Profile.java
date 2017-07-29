@@ -113,10 +113,14 @@ public class Profile {
 	public String toString() {
 		String pathPrint = "";
 		for(int i = 0; i < path.size(); i++) {
-			pathPrint += path.get(i).jerk;
+			pathPrint += path.get(i).velocity;
 			pathPrint += " ";
 		}
 		return pathPrint;
+	}
+	
+	public int getSteps() {
+		return path.size();
 	}
 	
 	public enum ProfileStatus {ACCELERATING, CONSTANT, MIRRORING};
