@@ -4,6 +4,11 @@ import org.usfirst.frc.team1306.lib.util.Gyro.Axis;
 import org.usfirst.frc.team1306.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * @SmartDashboardUpdate
+ * 
+ * @author Jackson Goth
+ */
 public class SmartDashboardUpdate extends CommandBase {
 	
 	public SmartDashboardUpdate() {
@@ -33,15 +38,5 @@ public class SmartDashboardUpdate extends CommandBase {
 	@Override
 	protected boolean isFinished() {
 		return false;
-	}
-
-	@Override
-	protected void end() {
-		
-	}
-
-	@Override
-	protected void interrupted() {
-		
 	}
 }

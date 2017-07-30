@@ -1,13 +1,8 @@
 package org.usfirst.frc.team1306.robot;
 
-import org.usfirst.frc.team1306.robot.commands.SmartDashboardUpdate;
-import org.usfirst.frc.team1306.robot.commands.drivetrain.DriveTest;
 import org.usfirst.frc.team1306.robot.triggers.ControllerButton;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * @OI
@@ -23,70 +18,39 @@ public class OI {
 	private static XboxController primaryController = null;
 	private static XboxController secondaryController = null;
 	
-	//Declare buttons on primary controller
-	private final Button pbuttonA;
-	private final Button pbuttonB;
-//	private final Button pbuttonX;
-//	private final Button pbuttonY;
-//	private final Button pbuttonRB;
-//	private final Button pbuttonLB;
-//	private final Button pbuttonStart;
-//	private final Button pbuttonBack;
-//	private final Trigger primaryDPadUp;
-//	private final Trigger primaryDPadRight;
-//	private final Trigger primaryDPadLeft;
-//	private final Trigger primaryDPadDown;
-	
-	//Declare buttons on secondary controller
-//	private final Button sbuttonA;
-//	private final Button sbuttonB;
-//	private final Button sbuttonX;
-//	private final Button sbuttonY;
-//	private final Button sbuttonRB;
-//	private final Button sbuttonLB;
-//	private final Button sbuttonStart;
-//	private final Button sbuttonBack;	
-//	private final Trigger secondaryDPadUp;
-//	private final Trigger secondaryDPadRight;
-//	private final Trigger secondaryDPadLeft;
-//	private final Trigger secondaryDPadDown;
-	
 	public OI() {
 		
 		//Declare ports of xbox controllers
 		primaryController = new XboxController(RobotMap.PRIMARY_PORT);
 		secondaryController = new XboxController(RobotMap.SECONDARY_PORT);
 		
-		//Map buttons to xbox controller buttons for primary controller
-		pbuttonA = new JoystickButton(primaryController, ControllerButton.A.value);
-		pbuttonB = new JoystickButton(primaryController, ControllerButton.B.value);
-//		pbuttonX = new JoystickButton(primaryController, XboxController.X);
-//		pbuttonY = new JoystickButton(primaryController, XboxController.Y);
-//		pbuttonRB = new JoystickButton(primaryController, XboxController.RB);
-//		pbuttonLB = new JoystickButton(primaryController, XboxController.LB); 
-//		pbuttonStart = new JoystickButton(primaryController, XboxController.START);
-//		pbuttonBack = new JoystickButton(primaryController, XboxController.BACK);
-//		primaryDPadUp = new DPadPress(primaryController, DPadDirection.UP);
-//		primaryDPadRight = new DPadPress(primaryController, DPadDirection.RIGHT);
-//		primaryDPadLeft = new DPadPress(primaryController, DPadDirection.LEFT);
-//		primaryDPadDown = new DPadPress(primaryController, DPadDirection.DOWN);
+		//Declares and maps buttons to xbox controller buttons for primary controller
+//		Button pbuttonA = new JoystickButton(primaryController, ControllerButton.A.value);
+//		Button pbuttonB = new JoystickButton(primaryController, ControllerButton.B.value);
+//		Button pbuttonX = new JoystickButton(primaryController, XboxController.X);
+//		Button pbuttonY = new JoystickButton(primaryController, XboxController.Y);
+//		Button pbuttonRB = new JoystickButton(primaryController, XboxController.RB);
+//		Button pbuttonLB = new JoystickButton(primaryController, XboxController.LB); 
+//		Button pbuttonStart = new JoystickButton(primaryController, XboxController.START);
+//		Button pbuttonBack = new JoystickButton(primaryController, XboxController.BACK);
+//		Button primaryDPadUp = new DPadPress(primaryController, DPadDirection.UP);
+//		Button primaryDPadRight = new DPadPress(primaryController, DPadDirection.RIGHT);
+//		Button primaryDPadLeft = new DPadPress(primaryController, DPadDirection.LEFT);
+//		Button primaryDPadDown = new DPadPress(primaryController, DPadDirection.DOWN);
 		
-		//Map buttons to xbox controller buttons for secondary controller
-//		sbuttonA = new JoystickButton(secondaryController, XboxController.A);
-//		sbuttonB = new JoystickButton(secondaryController, XboxController.B);
-//		sbuttonX = new JoystickButton(secondaryController, XboxController.X);
-//		sbuttonY = new JoystickButton(secondaryController, XboxController.Y);
-//		sbuttonRB = new JoystickButton(secondaryController, XboxController.RB);
-//		sbuttonLB = new JoystickButton(secondaryController, XboxController.LB);
-//		sbuttonStart = new JoystickButton(secondaryController, XboxController.START);
-//		sbuttonBack = new JoystickButton(secondaryController, XboxController.BACK);
-//		secondaryDPadUp = new DPadPress(secondaryControlsler, DPadDirection.UP);
-//		secondaryDPadRight = new DPadPress(secondaryController, DPadDirection.RIGHT);
-//		secondaryDPadLeft = new DPadPress(secondaryController, DPadDirection.LEFT);
-//		secondaryDPadDown = new DPadPress(secondaryController, DPadDirection.DOWN);
-	
-		pbuttonA.whenPressed(new DriveTest());
-		pbuttonB.whenPressed(new SmartDashboardUpdate());
+		//Declares and maps buttons to xbox controller buttons for secondary controller
+//		Button sbuttonA = new JoystickButton(secondaryController, XboxController.A);
+//		Button sbuttonB = new JoystickButton(secondaryController, XboxController.B);
+//		Button sbuttonX = new JoystickButton(secondaryController, XboxController.X);
+//		Button sbuttonY = new JoystickButton(secondaryController, XboxController.Y);
+//		Button sbuttonRB = new JoystickButton(secondaryController, XboxController.RB);
+//		Button sbuttonLB = new JoystickButton(secondaryController, XboxController.LB);
+//		Button sbuttonStart = new JoystickButton(secondaryController, XboxController.START);
+//		Button sbuttonBack = new JoystickButton(secondaryController, XboxController.BACK);
+//		Button secondaryDPadUp = new DPadPress(secondaryControlsler, DPadDirection.UP);
+//		Button secondaryDPadRight = new DPadPress(secondaryController, DPadDirection.RIGHT);
+//		Button secondaryDPadLeft = new DPadPress(secondaryController, DPadDirection.LEFT);
+//		Button secondaryDPadDown = new DPadPress(secondaryController, DPadDirection.DOWN);
 	}
 	
 	public enum Controller {P,S}; //Controller (primary or secondary)

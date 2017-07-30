@@ -3,8 +3,12 @@ package org.usfirst.frc.team1306.robot.commands.drivetrain;
 import org.usfirst.frc.team1306.robot.commands.CommandBase;
 import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * @Follow2DPath
+ * 
+ * @author Jackson Goth
+ */
 public class Follow2DPath extends CommandBase {
 
 	private Profile2D profile;
