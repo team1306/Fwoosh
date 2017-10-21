@@ -27,26 +27,26 @@ public class OI {
 		//Declares and maps buttons to xbox controller buttons for primary controller
 //		Button pbuttonA = new JoystickButton(primaryController, ControllerButton.A.value);
 //		Button pbuttonB = new JoystickButton(primaryController, ControllerButton.B.value);
-//		Button pbuttonX = new JoystickButton(primaryController, XboxController.X);
-//		Button pbuttonY = new JoystickButton(primaryController, XboxController.Y);
-//		Button pbuttonRB = new JoystickButton(primaryController, XboxController.RB);
-//		Button pbuttonLB = new JoystickButton(primaryController, XboxController.LB); 
-//		Button pbuttonStart = new JoystickButton(primaryController, XboxController.START);
-//		Button pbuttonBack = new JoystickButton(primaryController, XboxController.BACK);
+//		Button pbuttonX = new JoystickButton(primaryController, ControllerButton.X.value);
+//		Button pbuttonY = new JoystickButton(primaryController, ControllerButton.Y.value);
+//		Button pbuttonRB = new JoystickButton(primaryController, ControllerButton.RB.value);
+//		Button pbuttonLB = new JoystickButton(primaryController, ControllerButton.LB.value); 
+//		Button pbuttonStart = new JoystickButton(primaryController, ControllerButton.START.value);
+//		Button pbuttonBack = new JoystickButton(primaryController, ControllerButton.BACK.value);
 //		Button primaryDPadUp = new DPadPress(primaryController, DPadDirection.UP);
 //		Button primaryDPadRight = new DPadPress(primaryController, DPadDirection.RIGHT);
 //		Button primaryDPadLeft = new DPadPress(primaryController, DPadDirection.LEFT);
 //		Button primaryDPadDown = new DPadPress(primaryController, DPadDirection.DOWN);
 		
 		//Declares and maps buttons to xbox controller buttons for secondary controller
-//		Button sbuttonA = new JoystickButton(secondaryController, XboxController.A);
-//		Button sbuttonB = new JoystickButton(secondaryController, XboxController.B);
-//		Button sbuttonX = new JoystickButton(secondaryController, XboxController.X);
-//		Button sbuttonY = new JoystickButton(secondaryController, XboxController.Y);
-//		Button sbuttonRB = new JoystickButton(secondaryController, XboxController.RB);
-//		Button sbuttonLB = new JoystickButton(secondaryController, XboxController.LB);
-//		Button sbuttonStart = new JoystickButton(secondaryController, XboxController.START);
-//		Button sbuttonBack = new JoystickButton(secondaryController, XboxController.BACK);
+//		Button sbuttonA = new JoystickButton(secondaryController, ControllerButton.A.value);
+//		Button sbuttonB = new JoystickButton(secondaryController, ControllerButton.B.value);
+//		Button sbuttonX = new JoystickButton(secondaryController, ControllerButton.X.value);
+//		Button sbuttonY = new JoystickButton(secondaryController, ControllerButton.Y.value);
+//		Button sbuttonRB = new JoystickButton(secondaryController, ControllerButton.RB.value);
+//		Button sbuttonLB = new JoystickButton(secondaryController, ControllerButton.LB.value);
+//		Button sbuttonStart = new JoystickButton(secondaryController,ControllerButton.START.value);
+//		Button sbuttonBack = new JoystickButton(secondaryController, ControllerButton.BACK.value);
 //		Button secondaryDPadUp = new DPadPress(secondaryControlsler, DPadDirection.UP);
 //		Button secondaryDPadRight = new DPadPress(secondaryController, DPadDirection.RIGHT);
 //		Button secondaryDPadLeft = new DPadPress(secondaryController, DPadDirection.LEFT);
