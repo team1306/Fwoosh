@@ -1,11 +1,11 @@
 package org.usfirst.frc.team1306.robot.subsystems;
 
-import org.usfirst.frc.team1306.lib.util.DriveSide;
-import org.usfirst.frc.team1306.lib.util.Gyro;
-import org.usfirst.frc.team1306.lib.util.Settings;
-import org.usfirst.frc.team1306.lib.util.Settings.DriveMode;
 import org.usfirst.frc.team1306.robot.Constants;
-import org.usfirst.frc.team1306.robot.commands.drivetrain.Drive;
+import org.usfirst.frc.team1306.robot.drivetrain.Drive;
+import org.usfirst.frc.team1306.robot.drivetrain.DriveSide;
+import org.usfirst.frc.team1306.robot.drivetrain.Settings;
+import org.usfirst.frc.team1306.robot.drivetrain.Settings.DriveMode;
+
 import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

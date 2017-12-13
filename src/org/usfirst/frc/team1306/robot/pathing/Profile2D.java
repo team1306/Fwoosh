@@ -1,6 +1,4 @@
-package org.usfirst.frc.team1306.robot.commands.drivetrain;
-
-import org.usfirst.frc.team1306.lib.util.ProfileParams;
+package org.usfirst.frc.team1306.robot.pathing;
 
 /**
  * @Profile2D

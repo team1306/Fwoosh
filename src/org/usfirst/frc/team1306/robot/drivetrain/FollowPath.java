@@ -1,6 +1,8 @@
-package org.usfirst.frc.team1306.robot.commands.drivetrain;
+package org.usfirst.frc.team1306.robot.drivetrain;
 
 import org.usfirst.frc.team1306.robot.commands.CommandBase;
+import org.usfirst.frc.team1306.robot.pathing.Profile;
+
 import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1306.lib.util;
+package org.usfirst.frc.team1306.robot.pathing;
 
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
@@ -613,7 +613,7 @@ public class FalconPathPlanner
 	 * @param robotTrackWidth - distance between left and right side wheels of a skid steer chassis. Known as the track width.
 	 */
 	//public void calculate(double totalTime, double timeStep, double robotTrackWidth)
-	public void calculate(PathParams params)
+	public void calculate(Profile2DParams params)
 	{
 		/**
 		 * pseudo code
@@ -698,7 +698,7 @@ public class FalconPathPlanner
 
 		final FalconPathPlanner path = new FalconPathPlanner(waypoints);
 		
-		PathParams params = new PathParams(totalTime,timeStep,robotTrackWidth);
+		Profile2DParams params = new Profile2DParams(totalTime,timeStep,robotTrackWidth);
 		
 		path.calculate(params);
 
@@ -820,7 +820,7 @@ public class FalconPathPlanner
 
 		final FalconPathPlanner path = new FalconPathPlanner(CheesyPath);
 		
-		PathParams params = new PathParams(totalTime,timeStep,robotTrackWidth);
+		Profile2DParams params = new Profile2DParams(totalTime,timeStep,robotTrackWidth);
 		
 		path.calculate(params);
 		

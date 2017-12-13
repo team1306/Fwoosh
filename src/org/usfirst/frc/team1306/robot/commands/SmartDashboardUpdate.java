@@ -1,7 +1,8 @@
 package org.usfirst.frc.team1306.robot.commands;
 
-import org.usfirst.frc.team1306.lib.util.Gyro.Axis;
 import org.usfirst.frc.team1306.robot.Constants;
+import org.usfirst.frc.team1306.robot.subsystems.Gyro.Axis;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**

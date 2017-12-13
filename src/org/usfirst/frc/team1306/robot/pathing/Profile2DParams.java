@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1306.lib.util;
+package org.usfirst.frc.team1306.robot.pathing;
 
 
 /**
@@ -6,11 +6,11 @@ package org.usfirst.frc.team1306.lib.util;
  * 
  * @author Jackson Goth
  */
-public class PathParams {
+public class Profile2DParams {
 
 	public double time, timeInterval, robotTrackWidth;
 	
-	public PathParams(double time, double timeInterval, double robotTrackWidth) {
+	public Profile2DParams(double time, double timeInterval, double robotTrackWidth) {
 		this.time = time;
 		this.timeInterval = timeInterval;
 		this.robotTrackWidth = robotTrackWidth;

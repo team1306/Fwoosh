@@ -1,6 +1,9 @@
-package org.usfirst.frc.team1306.lib.util;
+package org.usfirst.frc.team1306.robot.drivetrain;
 
 import java.util.ArrayList;
+
+import org.usfirst.frc.team1306.lib.util.PIDParameters;
+
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;

@@ -1,11 +1,11 @@
 package org.usfirst.frc.team1306.robot.commands;
 
-import org.usfirst.frc.team1306.lib.util.Settings;
-import org.usfirst.frc.team1306.lib.util.Settings.Device;
-import org.usfirst.frc.team1306.lib.util.Settings.DriveMode;
-import org.usfirst.frc.team1306.lib.util.Settings.TalonType;
 import org.usfirst.frc.team1306.robot.OI;
 import org.usfirst.frc.team1306.robot.RobotMap;
+import org.usfirst.frc.team1306.robot.drivetrain.Settings;
+import org.usfirst.frc.team1306.robot.drivetrain.Settings.Device;
+import org.usfirst.frc.team1306.robot.drivetrain.Settings.DriveMode;
+import org.usfirst.frc.team1306.robot.drivetrain.Settings.TalonType;
 import org.usfirst.frc.team1306.robot.subsystems.Drivetrain;
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Command;

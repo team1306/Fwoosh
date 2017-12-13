@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1306.lib.util;
+package org.usfirst.frc.team1306.robot.pathing;
 
 public class ProfileParams {
 
