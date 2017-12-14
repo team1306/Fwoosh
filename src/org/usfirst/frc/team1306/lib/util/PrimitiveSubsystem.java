@@ -26,6 +26,7 @@ public class PrimitiveSubsystem extends Subsystem {
 	
 	public PrimitiveSubsystem(String name) {
 		controllers = new ArrayList<PWMSpeedController>();
+		pneumatics = new ArrayList<SolenoidBase>();
 		mechanism = name;
 	}
 	
