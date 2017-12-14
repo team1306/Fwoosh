@@ -10,15 +10,16 @@ package org.usfirst.frc.team1306.robot;
  */
 public class RobotMap {
 	
-	//OI Ports
+	/** OI Ports */
 	public static final int PRIMARY_PORT = 0;
 	public static final int SECONDARY_PORT = 1;
 	
-	//Drivetrain Ports
+	/** Drivetrain Ports */
 	public static final int LEFT_TALON_1_PORT = 1;
 	public static final int LEFT_TALON_2_PORT = 3;
 	public static final int RIGHT_TALON_1_PORT = 2;
 	public static final int RIGHT_TALON_2_PORT = 4;
 	
-	public static final int SHOOTER_PORT = 7;
+	/** Intake Ports */
+	public static final int INTAKE_PORT = 7;
 }

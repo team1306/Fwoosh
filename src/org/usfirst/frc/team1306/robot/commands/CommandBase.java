@@ -13,9 +13,8 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * @CommandBase
  * 
- * This class is the abstract for all other commands. This static class contains
- * instances of all the subsystems and the oi class so that each command that
- * extends this class can have access to the subsystems.
+ * This class is the abstract for all other commands. This static class contains instances of all the subsystems and the oi class 
+ * so that each command that extends this class can have access to the subsystems.
  * 
  * @author Jackson Goth
  */
@@ -24,24 +23,27 @@ public abstract class CommandBase extends Command {
 	private static Settings driveConfig;
 	
 	protected static Drivetrain drivetrain;
+//	protected static PrimitiveSubsystem intake;
 	protected static OI oi;
 	
 	public static void init() {
 		
-		driveConfig = new Settings(); //Drivetrain Configuration
-		
-		/* Adding all of the TalonSRXs, one master and one slave for each side */
+		/* Drivetrain configuration which tells the subsystem how many Talon SRXs are present, if encoders and gyro are present, and what driving mode the driver wants */
+		driveConfig = new Settings();
 		driveConfig.add(new CANTalon(RobotMap.LEFT_TALON_1_PORT),TalonType.LEFT_MASTER);
 		driveConfig.add(new CANTalon(RobotMap.RIGHT_TALON_1_PORT),TalonType.RIGHT_MASTER);
 		driveConfig.add(new CANTalon(RobotMap.LEFT_TALON_2_PORT),TalonType.LEFT_SLAVE);
 		driveConfig.add(new CANTalon(RobotMap.RIGHT_TALON_2_PORT),TalonType.RIGHT_SLAVE);
-		
-		driveConfig.add(Device.ENCODER); //Adding encoders to the config
-		driveConfig.add(Device.GYRO); //Adding a gyro to the config
-		
+		driveConfig.add(Device.ENCODER);
+		driveConfig.add(Device.GYRO); 
 		driveConfig.setDriveMode(DriveMode.ARCADE);
 		
 		drivetrain = new Drivetrain(driveConfig);
+		
+//		intake = new PrimitiveSubsystem("Intake");
+//		intake.addSpeedController(SpeedController.SPARK,RobotMap.INTAKE_PORT);
+//		intake.addDoubleSolenoid(1,2);
+		
 		oi = new OI(); //OI is always initialized last
 	}
 
