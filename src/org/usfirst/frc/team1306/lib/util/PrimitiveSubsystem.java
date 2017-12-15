@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class PrimitiveSubsystem extends Subsystem {
 
+	public double motorSpeed;
 	private ArrayList<PWMSpeedController> controllers;
 	private ArrayList<SolenoidBase> pneumatics;
 	private String mechanism;
@@ -28,6 +29,12 @@ public class PrimitiveSubsystem extends Subsystem {
 		controllers = new ArrayList<PWMSpeedController>();
 		pneumatics = new ArrayList<SolenoidBase>();
 		mechanism = name;
+		motorSpeed = 0.0;
+	}
+	
+	/** Sets the speed the motor or motors should run at */
+	public void setMotorSpeed(double speed) {
+		motorSpeed = speed;
 	}
 	
 	/** Adds a single solenoid on a specified channel */
@@ -71,12 +78,26 @@ public class PrimitiveSubsystem extends Subsystem {
 		}
 	}
 	
+	/** Spins all motors at a given speed */
+	public void spinAllMotors(double speed) {
+		for(int i = 0; i < controllers.size(); i++) {
+			controllers.get(i).set(speed);
+		}
+	}
+	
 	/** Spins a specified motor at a given speed */
 	public void spinMotor(int motor, double speed) {
 		try {
 			controllers.get(motor).set(speed);
 		} catch(Exception e) { 
 			SmartDashboard.putString("ERROR:",mechanism + " is trying to use a non-existent motor...");
+		}
+	}
+	
+	/** Stops all motors */
+	public void stopAll() {
+		for(int i = 0; i < controllers.size(); i++) {
+			controllers.get(i).set(0.0);
 		}
 	}
 	

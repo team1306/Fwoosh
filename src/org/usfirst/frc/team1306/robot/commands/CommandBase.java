@@ -23,7 +23,6 @@ public abstract class CommandBase extends Command {
 	private static Settings driveConfig;
 	
 	protected static Drivetrain drivetrain;
-//	protected static PrimitiveSubsystem intake;
 	protected static OI oi;
 	
 	public static void init() {
@@ -39,11 +38,7 @@ public abstract class CommandBase extends Command {
 		driveConfig.setDriveMode(DriveMode.ARCADE);
 		
 		drivetrain = new Drivetrain(driveConfig);
-		
-//		intake = new PrimitiveSubsystem("Intake");
-//		intake.addSpeedController(SpeedController.SPARK,RobotMap.INTAKE_PORT);
-//		intake.addDoubleSolenoid(1,2);
-		
+				
 		oi = new OI(); //OI is always initialized last
 	}
 
