@@ -1,8 +1,17 @@
 package org.usfirst.frc.team1306.robot;
 
+import org.usfirst.frc.team1306.lib.util.CommandParameters;
+import org.usfirst.frc.team1306.lib.util.CommandParameters.CommandType;
+import org.usfirst.frc.team1306.lib.util.CommandParameters.FinishedType;
+import org.usfirst.frc.team1306.lib.util.PrimitiveCommand;
+import org.usfirst.frc.team1306.robot.commands.CommandBase;
+import org.usfirst.frc.team1306.robot.commands.FireGamePiece;
 import org.usfirst.frc.team1306.robot.triggers.ControllerButton;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * @OI
@@ -25,12 +34,12 @@ public class OI {
 		secondaryController = new XboxController(RobotMap.SECONDARY_PORT);
 		
 		//Declares and maps buttons to xbox controller buttons for primary controller
-//		Button pbuttonA = new JoystickButton(primaryController, ControllerButton.A.value);
-//		Button pbuttonB = new JoystickButton(primaryController, ControllerButton.B.value);
-//		Button pbuttonX = new JoystickButton(primaryController, ControllerButton.X.value);
-//		Button pbuttonY = new JoystickButton(primaryController, ControllerButton.Y.value);
+		Button pbuttonA = new JoystickButton(primaryController, ControllerButton.A.value);
+		Button pbuttonB = new JoystickButton(primaryController, ControllerButton.B.value);
+		Button pbuttonX = new JoystickButton(primaryController, ControllerButton.X.value);
+		Button pbuttonY = new JoystickButton(primaryController, ControllerButton.Y.value);
 //		Button pbuttonRB = new JoystickButton(primaryController, ControllerButton.RB.value);
-//		Button pbuttonLB = new JoystickButton(primaryController, ControllerButton.LB.value); 
+		Button pbuttonLB = new JoystickButton(primaryController, ControllerButton.LB.value); 
 //		Button pbuttonStart = new JoystickButton(primaryController, ControllerButton.START.value);
 //		Button pbuttonBack = new JoystickButton(primaryController, ControllerButton.BACK.value);
 //		Button primaryDPadUp = new DPadPress(primaryController, DPadDirection.UP);
@@ -51,6 +60,13 @@ public class OI {
 //		Button secondaryDPadRight = new DPadPress(secondaryController, DPadDirection.RIGHT);
 //		Button secondaryDPadLeft = new DPadPress(secondaryController, DPadDirection.LEFT);
 //		Button secondaryDPadDown = new DPadPress(secondaryController, DPadDirection.DOWN);
+		
+		pbuttonA.whenPressed(new FireGamePiece());
+		pbuttonB.whenPressed(new PrimitiveCommand(CommandBase.geartake, new CommandParameters(CommandType.PUSH,FinishedType.INSTANT)));
+		pbuttonY.whenPressed(new PrimitiveCommand(CommandBase.geartake, new CommandParameters(CommandType.PULL,FinishedType.INSTANT)));
+		pbuttonX.whenPressed(new PrimitiveCommand(CommandBase.intake, new CommandParameters(CommandType.SPIN,FinishedType.TOGGLED)));
+	
+		pbuttonLB.whenPressed(new PrimitiveCommand(CommandBase.geartake, new CommandParameters(CommandType.SPIN,FinishedType.TOGGLED)));
 	}
 	
 	public enum Controller {P,S}; //Controller (primary or secondary)

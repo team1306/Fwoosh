@@ -71,14 +71,20 @@ public class Drivetrain extends Subsystem {
 	
 	/** Set's position of both encoders back to zero */
 	public void resetEncoders() {
+		leftMotors.resetEncoderPos();
+		rightMotors.resetEncoderPos();
 	}
 	
 	/** Return encoder position of either Left or Right sides of drivetrain) */
 	public double getEncoderPos(Side side) {
+		if(side.equals(Side.LEFT)) { return leftMotors.getEncoderPos(); }
+		else { return rightMotors.getEncoderPos(); }
 	}
 	
 	/** Return encoder velocity of either Left or Right sides of drivetrain) */
 	public double getEncoderVel(Side side) {
+		if(side.equals(Side.LEFT)) { return leftMotors.getEncoderVel(); }
+		else { return rightMotors.getEncoderVel(); }
 	}
 	
 	public enum Side {LEFT,RIGHT};
