@@ -15,7 +15,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
-
 import javax.swing.*;
 
 /**

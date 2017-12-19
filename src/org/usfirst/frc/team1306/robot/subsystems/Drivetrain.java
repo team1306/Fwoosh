@@ -5,10 +5,8 @@ import org.usfirst.frc.team1306.robot.drivetrain.Drive;
 import org.usfirst.frc.team1306.robot.drivetrain.DriveSide;
 import org.usfirst.frc.team1306.robot.drivetrain.Settings;
 import org.usfirst.frc.team1306.robot.drivetrain.Settings.DriveMode;
-
 import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * @Drivetrain
@@ -21,22 +19,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Drivetrain extends Subsystem {
 
-	public DriveSide leftMotors, rightMotors; //Sides of the drivetrain (each acts like a Talon SRX)
-	public DriveMode mode; //Initial control mode for getting input from controllers
+	private DriveSide leftMotors, rightMotors; //Sides of the drivetrain (each behaves like a TalonSRX)
+	private DriveMode mode; //Initial manual drive-mode to use (Tank-drive, arcade, etc.)
 	public Gyro gyro; //Main gyro object other classes with reference
 	
 	public Drivetrain(Settings settings) {
-		
 		leftMotors = new DriveSide(settings.leftSide);
 		rightMotors = new DriveSide(settings.rightSide);
-		
-		mode = settings.driveMode; //Drivetrain configuration (talons, gyro, encoders)
+		mode = settings.driveMode; //Which manual drive-mode to use (Tank-drive, arcade, etc.)
 		
 		/* If gyro is present, makes it accessible */
 		if(settings.gyro != null) {
 			gyro = settings.gyro;
 		}
-		
 		/* If encoders are present, initialized them in appropriate driveside */
 		if(settings.encodersPresent) {
 			leftMotors.initEncoders();
@@ -44,17 +39,10 @@ public class Drivetrain extends Subsystem {
 		}
 	}
 
-	/**
-	 * Powers each DriveSide with a left and right PercentVbus speed
-	 * @param leftVal - Speed for left motors
-	 * @param rightVal - Speed for right motors
-	 */
+	/** Drives the robot in 'PercentVBus' mode (-1.0-1.0) by giving the left and right motors potentially different speeds */
 	public void driveVBus(double leftVal, double rightVal) {
 		leftMotors.changeControlMode(TalonControlMode.PercentVbus);
 		rightMotors.changeControlMode(TalonControlMode.PercentVbus);
-
-		SmartDashboard.putNumber("leftVbus",leftVal);
-		SmartDashboard.putNumber("rightVbus",rightVal);
 		
 		if(Constants.DRIVETRAIN_ENABLED) {
 			leftMotors.set(leftVal);
@@ -62,11 +50,7 @@ public class Drivetrain extends Subsystem {
 		}
 	}
 	
-	/**
-	 * Powers each DriveSide with a left and right speed
-	 * @param leftVal - Speed for left motors
-	 * @param rightVal - Speed for right motors
-	 */
+	/** Drives the robot in 'Speed' mode by giving left and right side motors potentially different speeds */
 	public void driveSpeed(double leftVal, double rightVal) {
 		leftMotors.changeControlMode(TalonControlMode.Speed);
 		rightMotors.changeControlMode(TalonControlMode.Speed);
@@ -77,9 +61,7 @@ public class Drivetrain extends Subsystem {
 		}
 	}
 	
-	/**
-	 * Forces all drive-motors to stop turning
-	 */
+	/** Stops turning all drive-motors */
 	public void stop() {
 		leftMotors.changeControlMode(TalonControlMode.PercentVbus);
 		rightMotors.changeControlMode(TalonControlMode.PercentVbus);
@@ -87,6 +69,21 @@ public class Drivetrain extends Subsystem {
 		rightMotors.set(0.0);
 	}
 	
+	/** Set's position of both encoders back to zero */
+	public void resetEncoders() {
+	}
+	
+	/** Return encoder position of either Left or Right sides of drivetrain) */
+	public double getEncoderPos(Side side) {
+	}
+	
+	/** Return encoder velocity of either Left or Right sides of drivetrain) */
+	public double getEncoderVel(Side side) {
+	}
+	
+	public enum Side {LEFT,RIGHT};
+	
+	/** Starts the manual driving command in a specified drive-mode */
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new Drive(mode));

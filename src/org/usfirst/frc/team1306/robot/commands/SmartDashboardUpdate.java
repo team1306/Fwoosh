@@ -1,19 +1,21 @@
 package org.usfirst.frc.team1306.robot.commands;
 
 import org.usfirst.frc.team1306.robot.Constants;
+import org.usfirst.frc.team1306.robot.subsystems.Drivetrain.Side;
 import org.usfirst.frc.team1306.robot.subsystems.Gyro.Axis;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * @SmartDashboardUpdate
+ * 
+ * Updates the SmartDashboard with debug info for each subsystem if it's requested
  * 
  * @author Jackson Goth
  */
 public class SmartDashboardUpdate extends CommandBase {
 	
 	public SmartDashboardUpdate() {
-		setRunWhenDisabled(true);
+		setRunWhenDisabled(true); //Useful to run at all times
 	}
 	
 	@Override
@@ -27,17 +29,17 @@ public class SmartDashboardUpdate extends CommandBase {
 		}
 		
 		if(Constants.DRIVETRAIN_DEBUG) {
-			SmartDashboard.putNumber("LeftSide-Position:",drivetrain.leftMotors.getEncPos());
-			SmartDashboard.putNumber("RightSide-Position:",drivetrain.rightMotors.getEncPos());
-			SmartDashboard.putNumber("LeftSide-AdjustPos:",Math.abs(drivetrain.leftMotors.getEncPos()/1024)*12.5663);
-			SmartDashboard.putNumber("RightSide-AdjustPos:",Math.abs(drivetrain.rightMotors.getEncPos()/1024)*12.5663);
-			SmartDashboard.putNumber("LeftSide-Velocity:",drivetrain.leftMotors.getEncVel());
-			SmartDashboard.putNumber("RightSide-Velocity:",drivetrain.rightMotors.getEncVel());
+			SmartDashboard.putNumber("LeftSide-Position:",drivetrain.getEncoderPos(Side.LEFT));
+			SmartDashboard.putNumber("RightSide-Position:",drivetrain.getEncoderPos(Side.RIGHT));
+			SmartDashboard.putNumber("LeftSide-AdjustPos:",Math.abs(drivetrain.getEncoderPos(Side.LEFT)/1024)*12.5663);
+			SmartDashboard.putNumber("RightSide-AdjustPos:",Math.abs(drivetrain.getEncoderPos(Side.RIGHT)/1024)*12.5663);
+			SmartDashboard.putNumber("LeftSide-Velocity:",drivetrain.getEncoderVel(Side.LEFT));
+			SmartDashboard.putNumber("RightSide-Velocity:",drivetrain.getEncoderVel(Side.RIGHT));
 		}
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return false; //Should never end
 	}
 }

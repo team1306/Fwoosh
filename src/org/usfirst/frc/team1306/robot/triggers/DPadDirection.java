@@ -4,7 +4,6 @@ package org.usfirst.frc.team1306.robot.triggers;
  * An enum that represents the possible angles for the D-Pad to be pressed.
  * 
  * @author Finn Voichick
- *
  */
 public enum DPadDirection {
 

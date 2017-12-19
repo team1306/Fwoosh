@@ -2,15 +2,16 @@ package org.usfirst.frc.team1306.robot.drivetrain;
 
 import org.usfirst.frc.team1306.robot.commands.CommandBase;
 import org.usfirst.frc.team1306.robot.pathing.Profile;
-
-import com.ctre.CANTalon.TalonControlMode;
+import org.usfirst.frc.team1306.robot.subsystems.Drivetrain.Side;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * @FollowPath
  * 
- * This command is meant to drive the robot along a given path/profile and applies a P-loop to how far the drivetrain is off from the path.
+ * This command is meant to drive the robot along a given path/profile and applies a P-loop 
+ * to how far the drivetrain is off from the path.
+ * 
  * @author Jackson Goth
  */
 public class FollowPath extends CommandBase {
@@ -34,10 +35,7 @@ public class FollowPath extends CommandBase {
 		timer.reset();
 		timer.start();
 		
-		drivetrain.leftMotors.changeControlMode(TalonControlMode.Speed);
-		drivetrain.rightMotors.changeControlMode(TalonControlMode.Speed);
-		drivetrain.leftMotors.setEncPos(0);
-		drivetrain.rightMotors.setEncPos(0);
+		drivetrain.resetEncoders();
 		
 		counter = 0; //Resets counter that's used to determine position in profile
 		initAngle = drivetrain.gyro.getAngle();
@@ -49,8 +47,8 @@ public class FollowPath extends CommandBase {
 		counter = (int) (timer.get() / 0.01);
 		
 		double speed = profile.path.get(counter).velocity;
-		double leftError = profile.path.get(counter).position - (Math.abs(drivetrain.leftMotors.getEncPos()/1024)*12.5663);
-		double rightError = profile.path.get(counter).position - (Math.abs(drivetrain.rightMotors.getEncPos()/1024)*12.5663);
+		double leftError = profile.path.get(counter).position - (Math.abs(drivetrain.getEncoderPos(Side.LEFT)/1024)*12.5663);
+		double rightError = profile.path.get(counter).position - (Math.abs(drivetrain.getEncoderPos(Side.RIGHT)/1024)*12.5663);
 		double leftAdj = leftError * 2.25;
 		double rightAdj = rightError * 2.25;
 		

@@ -2,13 +2,14 @@ package org.usfirst.frc.team1306.robot.drivetrain;
 
 import org.usfirst.frc.team1306.robot.commands.CommandBase;
 import org.usfirst.frc.team1306.robot.pathing.FalconPathPlanner;
-
-import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * @Follow2DPath
+ * 
+ * This command drives the robot along a FalconPathPlanner 2D path, using feedback from the gyro and will end
+ * after a certain amount of time.
  * 
  * @author Jackson Goth
  */
@@ -37,10 +38,7 @@ public class Follow2DPath extends CommandBase {
 		timer.reset();
 		timer.start();
 		
-		drivetrain.leftMotors.changeControlMode(TalonControlMode.Speed);
-		drivetrain.rightMotors.changeControlMode(TalonControlMode.Speed);
-		drivetrain.leftMotors.setEncPos(0);
-		drivetrain.rightMotors.setEncPos(0);
+		drivetrain.resetEncoders();
 		
 		counter = 0; //Resets counter that's used to determine position in profile
 	}

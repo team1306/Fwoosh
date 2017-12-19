@@ -27,9 +27,7 @@ public class Settings {
 		driveMode = DriveMode.ARCADE; //Default control mode is arcade.
 	}
 	
-	/**
-	 * Adds a new talon to a specified driveside with a specified type (master or slave)
-	 */
+	/** Adds a new talon to a specified driveside with a specified type (master or slave) */
 	public void add(CANTalon talon, TalonType type) {
 		if(type.equals(TalonType.LEFT_MASTER)) {
 			leftSide.add(0,talon);
@@ -42,9 +40,7 @@ public class Settings {
 		}
 	}
 	
-	/**
-	 * Adds a new device to the drivetrain (gyro or encoders)
-	 */
+	/** Adds a new device to the drivetrain (gyro or encoders) */
 	public void add(Device device) {
 		if(device.equals(Device.GYRO)) {
 			gyro = new Gyro();
@@ -53,16 +49,12 @@ public class Settings {
 		}
 	}
 	
-	/**
-	 * Sets the drivemode to a given drivemode (Arcade, Tank, Outreach)
-	 */
+	/** Sets the drivemode to a given drivemode (Arcade, Tank, Outreach) */
 	public void setDriveMode(DriveMode mode) {
 		driveMode = mode;
 	}
 	
 	public enum Device {GYRO, ENCODER}; //Device types
-	
 	public enum TalonType {LEFT_MASTER, RIGHT_MASTER, LEFT_SLAVE, RIGHT_SLAVE};
-	
 	public enum DriveMode {ARCADE, TANK_DRIVE, OUTREACH};
 }

@@ -10,7 +10,10 @@ import org.usfirst.frc.team1306.robot.commands.CommandBase;
 import org.usfirst.frc.team1306.robot.drivetrain.Settings.DriveMode;
 
 /**
- * Drives the robot in "tank-drive" mode with each trigger and joystick controlling it's respective half of the drivetrain.
+ * @Drive
+ * 
+ * Drives the robot in a specified mode (tank-drive, arcade, etc.) by pulling the status of the triggers and joysticks
+ * 
  * @author Sam Roquitte and Jackson Goth
  */
 public class Drive extends CommandBase {
@@ -64,11 +67,6 @@ public class Drive extends CommandBase {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
-	}
-
-	@Override
-	protected void end() {
-		drivetrain.stop();
+		return false; //Should never end
 	}
 }
