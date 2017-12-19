@@ -23,6 +23,7 @@ public class PrimitiveSubsystem extends Subsystem {
 	public double motorSpeed;
 	private ArrayList<PWMSpeedController> controllers;
 	private ArrayList<SolenoidBase> pneumatics;
+	private boolean enabled = true;
 	private String mechanism;
 	
 	public PrimitiveSubsystem(String name) {
@@ -34,7 +35,9 @@ public class PrimitiveSubsystem extends Subsystem {
 	
 	/** Sets the speed the motor or motors should run at */
 	public void setMotorSpeed(double speed) {
-		motorSpeed = speed;
+		if(enabled) {
+			motorSpeed = speed;
+		}
 	}
 	
 	/** Adds a single solenoid on a specified channel */
@@ -49,19 +52,24 @@ public class PrimitiveSubsystem extends Subsystem {
 	
 	/** Adds the appropriate type of speed-controller to the list of motors this subsystem can access */
 	public void addSpeedController(SpeedController controllerType, int port) {
-		if(controllerType.equals(SpeedController.TALON_SR)) {
-			controllers.add(new Talon(port));
-		} else if(controllerType.equals(SpeedController.SPARK)) {
-			controllers.add(new Spark(port));
+		try {
+			if(controllerType.equals(SpeedController.TALON_SR)) {
+				controllers.add(new Talon(port));
+			} else if(controllerType.equals(SpeedController.SPARK)) {
+				controllers.add(new Spark(port));
+			}
+		} catch(Exception e) {
+			SmartDashboard.putString("ERROR:",mechanism + " is trying to re-use an existing or non-existent port");
 		}
+		
 	}
 	
 	/** Pushes out all pneumatics whether they're running off single or double solenoids*/
 	public void pushOut() {
 		for(int i = 0; i < pneumatics.size(); i++) {
-			if(pneumatics.get(i) instanceof Solenoid) {
+			if(pneumatics.get(i) instanceof Solenoid && enabled) {
 				((Solenoid) pneumatics.get(i)).set(true);
-			} else if (pneumatics.get(i) instanceof DoubleSolenoid) {
+			} else if (pneumatics.get(i) instanceof DoubleSolenoid && enabled) {
 				((DoubleSolenoid) pneumatics.get(i)).set(DoubleSolenoid.Value.kForward);
 			}
 		}
@@ -70,9 +78,9 @@ public class PrimitiveSubsystem extends Subsystem {
 	/** Pulls in or disables all pneumatics whether they're running off single or double solenoids*/
 	public void pullIn() {
 		for(int i = 0; i < pneumatics.size(); i++) {
-			if(pneumatics.get(i) instanceof Solenoid) {
+			if(pneumatics.get(i) instanceof Solenoid && enabled) {
 				((Solenoid) pneumatics.get(i)).set(false);
-			} else if (pneumatics.get(i) instanceof DoubleSolenoid) {
+			} else if (pneumatics.get(i) instanceof DoubleSolenoid && enabled) {
 				((DoubleSolenoid) pneumatics.get(i)).set(DoubleSolenoid.Value.kReverse);
 			}
 		}
@@ -87,10 +95,12 @@ public class PrimitiveSubsystem extends Subsystem {
 	
 	/** Spins a specified motor at a given speed */
 	public void spinMotor(int motor, double speed) {
-		try {
-			controllers.get(motor).set(speed);
-		} catch(Exception e) { 
-			SmartDashboard.putString("ERROR:",mechanism + " is trying to use a non-existent motor...");
+		if(enabled) {
+			try {
+				controllers.get(motor).set(speed);
+			} catch(Exception e) { 
+				SmartDashboard.putString("ERROR:",mechanism + " is trying to use a non-existent motor...");
+			}
 		}
 	}
 	
@@ -99,6 +109,11 @@ public class PrimitiveSubsystem extends Subsystem {
 		for(int i = 0; i < controllers.size(); i++) {
 			controllers.get(i).set(0.0);
 		}
+	}
+	
+	/** Disable the subsystem */
+	public void disable() {
+		enabled = false;
 	}
 	
 	@Override
