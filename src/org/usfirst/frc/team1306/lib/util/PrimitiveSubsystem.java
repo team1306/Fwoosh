@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SolenoidBase;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -21,6 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class PrimitiveSubsystem extends Subsystem {
 
 	public double motorSpeed;
+	private Command defaultCommand;
 	private ArrayList<PWMSpeedController> controllers;
 	private ArrayList<SolenoidBase> pneumatics;
 	private boolean enabled = true;
@@ -29,6 +31,15 @@ public class PrimitiveSubsystem extends Subsystem {
 	public PrimitiveSubsystem(String name) {
 		controllers = new ArrayList<PWMSpeedController>();
 		pneumatics = new ArrayList<SolenoidBase>();
+		defaultCommand = null;
+		mechanism = name;
+		motorSpeed = 0.0;
+	}
+	
+	public PrimitiveSubsystem(Command dCommand, String name) {
+		controllers = new ArrayList<PWMSpeedController>();
+		pneumatics = new ArrayList<SolenoidBase>();
+		defaultCommand = dCommand;
 		mechanism = name;
 		motorSpeed = 0.0;
 	}
@@ -116,8 +127,13 @@ public class PrimitiveSubsystem extends Subsystem {
 		enabled = false;
 	}
 	
+	/** Sets the default command if one was provided */
 	@Override
-	protected void initDefaultCommand() { } // These subsystems shouldn't need default commands
+	protected void initDefaultCommand() {
+		if(defaultCommand != null) {
+			setDefaultCommand(defaultCommand);
+		}
+	}
 	
 	public enum SpeedController {TALON_SR,SPARK};
 }
