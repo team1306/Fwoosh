@@ -64,9 +64,9 @@ public class OI {
 		pbuttonA.whenPressed(new FireGamePiece());
 		pbuttonB.whenPressed(new PrimitiveCommand(CommandBase.geartake, new CommandParameters(CommandType.PUSH,FinishedType.INSTANT)));
 		pbuttonY.whenPressed(new PrimitiveCommand(CommandBase.geartake, new CommandParameters(CommandType.PULL,FinishedType.INSTANT)));
-		pbuttonX.whenPressed(new PrimitiveCommand(CommandBase.intake, new CommandParameters(CommandType.SPIN,FinishedType.TOGGLED)));
+		pbuttonX.toggleWhenPressed(new PrimitiveCommand(CommandBase.intake, new CommandParameters(CommandType.SPIN,FinishedType.TOGGLED)));
 	
-		pbuttonLB.whenPressed(new PrimitiveCommand(CommandBase.geartake, new CommandParameters(CommandType.SPIN,FinishedType.TOGGLED)));
+		pbuttonLB.toggleWhenPressed(new PrimitiveCommand(CommandBase.geartake, new CommandParameters(CommandType.SPIN,FinishedType.TOGGLED)));
 	}
 	
 	public enum Controller {P,S}; //Controller (primary or secondary)
