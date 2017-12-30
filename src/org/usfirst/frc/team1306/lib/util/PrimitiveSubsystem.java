@@ -135,5 +135,5 @@ public class PrimitiveSubsystem extends Subsystem {
 		}
 	}
 	
-	public enum SpeedController {TALON_SR,SPARK};
+	public enum SpeedController {TALON_SR,VICTOR_SPX,SPARK};
 }

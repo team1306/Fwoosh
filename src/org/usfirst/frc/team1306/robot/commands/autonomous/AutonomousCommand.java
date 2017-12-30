@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  * @AutonomousCommand
  * 
- * The autonomous command station that tells the robot what to do for multiple different automous routiness
+ * The autonomous command station that tells the robot what to do for multiple different automous routiness.
  * 
  * @author Jackson Goth
  */
@@ -20,7 +20,6 @@ public class AutonomousCommand extends CommandGroup {
 		if(mode.equals(AutoMode.FOLLOW_PATH)) {
 			
 			addSequential(new FollowPath(new Profile(96,18.25,45,45,15))); //Distance, Velocity, Accel, Jerk, Max Time
-		
 		}
 	}
 }

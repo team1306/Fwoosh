@@ -873,4 +873,3 @@ class FalconLinePlot extends JPanel implements ClipboardOwner{
     
     
 }
-   

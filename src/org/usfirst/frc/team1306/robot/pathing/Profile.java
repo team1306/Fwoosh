@@ -2,6 +2,13 @@ package org.usfirst.frc.team1306.robot.pathing;
 
 import java.util.ArrayList;
 
+/**
+ * @Profile
+ * 
+ * Profile for driving straight, using given velocity, acceleration, and jerk parameters.
+ * 
+ * @author Jackson Goth
+ */
 public class Profile {
 
 	public double maxTime = 15;
@@ -23,10 +30,7 @@ public class Profile {
 		int maxSteps = (int) (maxTime / stepTime);
 		
 		boolean mirroring = false;
-		int accelPreMirrorCounter = 0;
-		int accelPostMirrorCounter = 0;
-		int profileMirrorCounter = 0;
-		int profileMirrorStopPoint = 0;
+		int accelPreMirrorCounter = 0, accelPostMirrorCounter = 0, profileMirrorCounter = 0, profileMirrorStopPoint = 0;
 		
 		path.add(new Point(0,0,0,0));
 	
@@ -59,10 +63,8 @@ public class Profile {
 				profileMirrorStopPoint = mirrorPath.size();
 			}
 			
-			double position;
-			double velocity;
-			double acceleration = 0;
-			double jerk = 0;
+			double position, velocity;
+			double acceleration = 0, jerk = 0;
 			
 			if(status.equals(ProfileStatus.ACCELERATING)) {
 				if(subStatus.equals(ProfileSubStatus.ACCEL_RAMP_UP)) {

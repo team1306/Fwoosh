@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * @SmartDashboardUpdate
  * 
- * Updates the SmartDashboard with debug info for each subsystem if it's requested
+ * Updates the SmartDashboard with debug info for each subsystem if it's requested.
  * 
  * @author Jackson Goth
  */

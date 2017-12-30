@@ -12,7 +12,7 @@ import org.usfirst.frc.team1306.robot.drivetrain.Settings.DriveMode;
 /**
  * @Drive
  * 
- * Drives the robot in a specified mode (tank-drive, arcade, etc.) by pulling the status of the triggers and joysticks
+ * Drives the robot in a specified mode (tank-drive, arcade, etc.) by pulling the status of the triggers and joysticks.
  * 
  * @author Sam Roquitte and Jackson Goth
  */

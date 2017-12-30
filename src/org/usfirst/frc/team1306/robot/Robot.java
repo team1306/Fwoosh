@@ -15,8 +15,7 @@ import org.usfirst.frc.team1306.robot.commands.autonomous.AutonomousCommand.Auto
  * @Project_Fwoosh
  * Framework Which Occasionally Offers Significant Help
  * 
- * Basic framework for robot code which will hopefully contain most of the subsystems we will use
- * in the next FRC season. 
+ * Basic framework for robot code which will hopefully contain most of the subsystems we will use in the next FRC season. 
  * 
  * @author Jackson Goth
  */
@@ -44,18 +43,14 @@ public class Robot extends IterativeRobot {
 		new SmartDashboardUpdate().start();
 	}
 
-	/**
-	 * This function is called continuously while the robot is disabled
-	 */
+	/** This function is called continuously while the robot is disabled */
 	@Override
 	public void disabledPeriodic() {
 		SmartDashboard.putString("STATUS:","DISABLED");
 		Scheduler.getInstance().run();
 	}
 
-	/**
-	 * This function is called once each time the robot enters autonomous
-	 */
+	/** This function is called once each time the robot enters autonomous */
 	@Override
 	public void autonomousInit() {
 		autonomousCommand = chooser.getSelected();
@@ -65,18 +60,14 @@ public class Robot extends IterativeRobot {
 		}
 	}
 
-	/**
-	 * This function is called continuously during autonomous
-	 */
+	/** This function is called continuously during autonomous */
 	@Override
 	public void autonomousPeriodic() {
 		SmartDashboard.putString("STATUS:","AUTONOMOUS");
 		Scheduler.getInstance().run();
 	}
 
-	/**
-	 * This function is called once the robot enters the driver controlled period
-	 */
+	/** This function is called once the robot enters the driver controlled period */
 	@Override
 	public void teleopInit() {
 		
@@ -85,18 +76,14 @@ public class Robot extends IterativeRobot {
 		}
 	}
 
-	/**
-	 * This function is called continuously while the robot is under operator control
-	 */
+	/** This function is called continuously while the robot is under operator control */
 	@Override
 	public void teleopPeriodic() {
 		SmartDashboard.putString("STATUS:","ENABLED");
 		Scheduler.getInstance().run();
 	}
 
-	/**
-	 * This function is called continuosly during test mode which is started through the driverstation
-	 */
+	/** This function is called continuosly during test mode which is started through the driverstation */
 	@Override
 	public void testPeriodic() {
 		LiveWindow.run();

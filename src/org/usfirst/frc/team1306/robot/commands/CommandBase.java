@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * @CommandBase
  * 
- * This class is the abstract for all other commands. This static class contains instances of all the subsystems and the oi class 
+ * This class is the abstract for all other commands. This static class contains instances of all the subsystems and the OI class 
  * so that each command that extends this class can have access to the subsystems.
  * 
  * @author Jackson Goth

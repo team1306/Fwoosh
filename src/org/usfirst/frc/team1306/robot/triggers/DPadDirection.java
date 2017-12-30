@@ -1,6 +1,8 @@
 package org.usfirst.frc.team1306.robot.triggers;
 
 /**
+ * @DPadDirection
+ * 
  * An enum that represents the possible angles for the D-Pad to be pressed.
  * 
  * @author Finn Voichick
@@ -12,21 +14,12 @@ public enum DPadDirection {
 	/** The angle, in degrees, of this direction. */
 	private final int angle;
 
-	/**
-	 * Constructs a DPadDirection at a certain angle.
-	 * 
-	 * @param angle
-	 *            the angle for the new DPadDirection to point.
-	 */
+	/** Constructs a new DPadDirection at a certain angle. */
 	private DPadDirection(int angle) {
 		this.angle = angle;
 	}
 
-	/**
-	 * Gets the angle, in degrees, that this direction is pointing.
-	 * 
-	 * @return the angle of this DPadDirection.
-	 */
+	/** Gets the angle, in degrees, that this direction is pointing. */
 	public int getAngle() {
 		return angle;
 	}

@@ -7,7 +7,6 @@ import org.usfirst.frc.team1306.lib.util.PrimitiveCommand;
 import org.usfirst.frc.team1306.robot.commands.CommandBase;
 import org.usfirst.frc.team1306.robot.commands.FireGamePiece;
 import org.usfirst.frc.team1306.robot.triggers.ControllerButton;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -77,11 +76,8 @@ public class OI {
 	
 	public enum Side {L,R}; //Side (left or right) (for rumble)
 	
-	/**
-	 * Returns the joystick value (from -1.0 to 1.0) for a specified controller's joystick's axis (uses deadband)
-	 */
+	/** Returns the joystick value (from -1.0 to 1.0) for a specified controller's joystick's axis (uses deadband) */
 	public static double getJoyVal(Controller c, Joystick j, Axis a) {
-		
 		XboxController controller;
 		Hand side;
 		
@@ -97,11 +93,8 @@ public class OI {
 		}
 	}
 	
-	/**
-	 * Returns the value of the specified trigger (from 0.0 to 1.0)
-	 */
+	/** Returns the value of the specified trigger (from 0.0 to 1.0) */
 	public static double getTriggerVal(Controller c, Trigger t) {
-		
 		XboxController controller;
 		if(c.equals(Controller.P)) { controller = primaryController; }
 		else { controller = secondaryController; }
@@ -113,11 +106,8 @@ public class OI {
 		}
 	}
 	
-	/**.
-	 * Returns the value of a specified button on a specified controller
-	 */
+	/** Returns the value of a specified button on a specified controller */
 	public static boolean getButtonStatus(Controller c, ControllerButton b) {
-		
 		XboxController controller;
 		if(c.equals(Controller.P)) { controller = primaryController; }
 		else { controller = secondaryController; }
@@ -125,11 +115,8 @@ public class OI {
 		return controller.getRawButton(b.value);
 	}
 	
-	/**
-	 * Sets the rumble of a specified controller to a specified amount of rumble
-	 */
+	/** Sets the rumble of a specified controller to a specified amount of rumble */
 	public static void setRumble(Controller c, Side s, double rumbleness) {
-		
 		XboxController controller;
 		if(c.equals(Controller.P)) { controller = primaryController; }
 		else { controller = secondaryController; }
@@ -141,11 +128,8 @@ public class OI {
 		}
 	}
 	
-	/**
-	 * Resets the rumble on the specified side of a specified controller
-	 */
+	/** Resets the rumble on the specified side of a specified controller */
 	public static void resetRumble(Controller c, Side s) {
-		
 		XboxController controller;
 		if(c.equals(Controller.P)) { controller = primaryController; }
 		else { controller = secondaryController; }
@@ -157,21 +141,12 @@ public class OI {
 		}
 	}
 	
-	public static double getTriggerStatus() {
-		return primaryController.getLT();
-	}
-	
-	/**
-	 * Applies deadband to joystick values to prevent false readings when joystick is idle. It prevents 
-	 * very small changes to an idle joystick to trigger anything.
-	 */
+	/** Applies deadband to joystick values to prevent false readings when joystick is idle. */
 	private static double deadband(double value) {
 		if (value < -Constants.DEADBAND) {
 			return (value + Constants.DEADBAND) / (1.0 - Constants.DEADBAND);
 		} else if (value > Constants.DEADBAND) {
 			return (value - Constants.DEADBAND) / (1.0 - Constants.DEADBAND);
-		} else {
-			return 0;
-		}
+		} else { return 0; }
 	}
 }

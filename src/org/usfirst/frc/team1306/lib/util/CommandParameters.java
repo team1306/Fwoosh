@@ -43,4 +43,3 @@ public class CommandParameters {
 	public enum CommandType {SPIN,PUSH,PULL};
 	public enum FinishedType {WHILE_HELD,TOGGLED,INSTANT,TIME}
 }
-

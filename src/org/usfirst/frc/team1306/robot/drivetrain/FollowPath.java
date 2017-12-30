@@ -1,16 +1,15 @@
 package org.usfirst.frc.team1306.robot.drivetrain;
 
+import org.usfirst.frc.team1306.robot.Constants;
 import org.usfirst.frc.team1306.robot.commands.CommandBase;
 import org.usfirst.frc.team1306.robot.pathing.Profile;
 import org.usfirst.frc.team1306.robot.subsystems.Drivetrain.Side;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * @FollowPath
  * 
- * This command is meant to drive the robot along a given path/profile and applies a P-loop 
- * to how far the drivetrain is off from the path.
+ * This command is meant to drive the robot along a given path/profile and applies a P-loop to how far the drivetrain is off from the path.
  * 
  * @author Jackson Goth
  */
@@ -44,25 +43,17 @@ public class FollowPath extends CommandBase {
 	@Override
 	protected void execute() {
 		
-		counter = (int) (timer.get() / 0.01);
+		counter = (int) (timer.get() / Constants.PROFILE_STEP_TIME);
 		
 		double speed = profile.path.get(counter).velocity;
-		double leftError = profile.path.get(counter).position - (Math.abs(drivetrain.getEncoderPos(Side.LEFT)/1024)*12.5663);
-		double rightError = profile.path.get(counter).position - (Math.abs(drivetrain.getEncoderPos(Side.RIGHT)/1024)*12.5663);
-		double leftAdj = leftError * 2.25;
-		double rightAdj = rightError * 2.25;
+		double leftError = profile.path.get(counter).position - Math.abs(drivetrain.getEncoderPos(Side.LEFT)*Constants.ENCODER_INCHES_CONVERSION);
+		double rightError = profile.path.get(counter).position - Math.abs(drivetrain.getEncoderPos(Side.RIGHT)*Constants.ENCODER_INCHES_CONVERSION);
+		double leftAdjSpeed = speed + (leftError * Constants.ENCODER_ERROR_MULTIPLIER);
+		double rightAdjSpeed = speed + (rightError * Constants.ENCODER_ERROR_MULTIPLIER);
 		
-		double angleError = (drivetrain.gyro.getAngle() - initAngle) * 9;
+		double angleError = (drivetrain.gyro.getAngle() - initAngle) * Constants.GYRO_ERROR_MULTIPLIER;
 		
-		SmartDashboard.putNumber("angleError", angleError);
-		
-		SmartDashboard.putNumber("timer", timer.get());
-		SmartDashboard.putNumber("speed",speed);
-		SmartDashboard.putNumber("counter",counter);
-		SmartDashboard.putNumber("leftError",leftError);
-		SmartDashboard.putNumber("rightError",rightError);
-		
-		drivetrain.driveSpeed((((speed+leftAdj)/12.5663)*60)-angleError,(((speed+rightAdj)/12.5663)*60)+angleError);
+		drivetrain.driveSpeed((leftAdjSpeed*Constants.IPS_TO_RPM_CONVERSION)-angleError,(rightAdjSpeed*Constants.IPS_TO_RPM_CONVERSION)+angleError);
 	}
 
 	@Override
